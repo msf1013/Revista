@@ -36,6 +36,7 @@ public class ArticuloPendiente {
     * Valida la existencia de un registro
     * @param idArticuloPendiente ID del registro
     */
+   /*
    public boolean validar(int idArticuloPendiente){
       try {
          stmt.executeQuery ("SELECT idArticuloPendiente FROM ArticuloPendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
@@ -49,7 +50,7 @@ public class ArticuloPendiente {
          }
       } catch (SQLException e) {}
       return false;
-   }
+   }*/
 
    /**
     * Guarda articulo pendiente en base de datos
@@ -158,7 +159,7 @@ public class ArticuloPendiente {
     * @param idArticuloPendiente ID del articulo pendiente
     * @return El total de votos en contra
     */
-   public int getVotosEncontra(int idArticuloPendiente) {
+   public int getVotosEnContra(int idArticuloPendiente) {
       int votos = -1;
       try {
          stmt.executeQuery("SELECT COUNT(voto) FROM Votos WHERE idArticuloPendiente = " + idArticuloPendiente + " AND voto = 0");

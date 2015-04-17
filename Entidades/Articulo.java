@@ -21,6 +21,7 @@ public class Articulo {
     * Valida la existencia de un registro
     * @param idArticulo ID del registro
     */
+   /*
    public boolean validar(int idArticulo){
       try {
          stmt.executeQuery ("SELECT idArticulo FROM Articulo WHERE idArticulo = " + idArticulo);
@@ -34,7 +35,7 @@ public class Articulo {
          }
       } catch (SQLException e) {}
       return false;
-   }
+   }*/
 
    /**
     * Guarda articulo en la base de datos
