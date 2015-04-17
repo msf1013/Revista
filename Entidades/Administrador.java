@@ -67,16 +67,13 @@ public class Administrador extends Cuenta {
    }
 
    
-   public boolean crearJuez(String nombre, String apellidos, String email, String password, int numJuez){
+   public int crearJuez(String nombre, String apellidos, String email, String password, Date fecha, int numJuez){
       try {
-         Cuenta cuenta = new Cuenta(new Conexion());
-         int id = cuenta.guardaCuenta(nombre, apellidos, email, password, new Date(), "juez");
          Juez juez = new Juez(new Conexion());
-         juez.guardaJuez(numJuez);
-         return true;
+         return juez.guardaJuez(nombre, apellidos, email, password, fecha, numJuez);
       } catch (Exception e) {
          System.out.println("Cannot crearJuez(): " + e);
-         return false;
+         return -1;
       }
    }
 

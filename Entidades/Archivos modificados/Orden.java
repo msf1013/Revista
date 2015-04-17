@@ -1,16 +1,10 @@
-/**
- * Analisis y modelacion de sistemas de software: Proyecto final
- * Prof. Guillermo Jimenez
- * Equipo #4   
- * @authors Luis Mario Diaz, Humberto Makoto Morimoto,
- * Eduardo Zardain, Mario Sergio Fuentes
- */
-
 import java.sql.*;
 import java.util.Date;
 import java.util.Vector;
-
-// Clase que modela Ordenes de compra de revistas fisicas
+/**
+ *
+ * @author MarioDiaz
+ */
 public class Orden {
     //Atributos de conexion
     Connection conn;
@@ -18,8 +12,8 @@ public class Orden {
     PreparedStatement pStmt;
     
     
-    // Metodo constructor con conexion
-    public Orden(Conexion connect) {
+    //Metodo constructor
+    public Orden(Conexion connect){
         this.conn = connect.conn;
         this.stmt = connect.statem;
     }
@@ -126,7 +120,7 @@ public class Orden {
     }
     
     //Metodos set
-    public void setCargoTotal(int idOrden, double cargo) {
+    public void setCargoTotal(int idOrden, int cargo) {
         try {
             String sqlString = "UPDATE orden SET cargoTotal = '" + cargo + 
                     "' WHERE idorden = " + idOrden;
@@ -175,31 +169,37 @@ public class Orden {
             System.out.println("Cannot exceute setIdSuscriptor()" + e);
         }
     }
-
-    //HACER CAMBIOS EN GUARDAREVISTAORDEN Y CALCULACARGO
     
     //Metodo para calcular el cargo de la orden
-
-    private double calculaCargo(double costoRevista, double porcentaje, int cantTotal) {        
-        return (double) cantTotal * costoRevista * porcentaje; 
+    private double calculaCargo() {
+        double cargo = 0;
+        
+        return cargo; 
     }
 
 
     //Metodo para guardar las revistas del pedido
-    private void guardaRevistaOrden(Date fecha, int cant, int idOrden) {
+    private void guardaRevistaOrden(Vector<Date> vecFecha, Vector<Integer> vecCant, int idOrden) {
         Revista revista = new Revista(new Conexion());
-        int idRevista = revista.getIdRevista(fecha);
 
         try {
-            pStmt = conn.prepareStatement(
-                "INSERT INTO revistaOrden (idRevista, idOrden, cantidad)" +
-                " VALUES (?,?,?)");
-            pStmt.setInt(1,idRevista);
-            pStmt.setInt(2,idOrden);
-            pStmt.setInt(3,cant);
 
-            pStmt.executeUpdate();
-            
+            for(int i=0; i<vecFecha.size(); i++){
+
+                int unidadesRevista = vecCant.get(i);
+                Date fechaRevista = vecFecha.get(i);
+                int idRevista = revista.getIdRevista(fechaRevista);
+
+                pStmt = conn.prepareStatement(
+                    "INSERT INTO revistaOrden (idRevista, idOrden, cantidad)" +
+                    " VALUES (?,?,?)");
+                pStmt.setInt(1,idRevista);
+                pStmt.setInt(2,idOrden);
+                pStmt.setInt(3,unidadesRevista);
+
+                pStmt.executeUpdate();
+            }
+
         } catch(SQLException e) {
             System.out.println("Error guardando las revistas" + e);
         }
@@ -207,47 +207,28 @@ public class Orden {
     
     
     //Metodo que guarda la orden y regresa el idOrden
-    public int guardaOrden(int idSus, Vector<Date> vecFecha, Vector<Integer> vecCant, double costoRevista){
+    public int guardaOrden(double cargo, int ordComp, int numUni, int idSus){
         int idOrden = -1;
-        double porcentaje= 0.3;
         boolean ordEnv = true;
-        double cargo = -1;
-        boolean ordComp = false;
-        int numUni = -1;
-
-        //Creando la orden en la base de datos, con datos temporales
+        
         try {
             pStmt = conn.prepareStatement(
                     "INSERT INTO orden (cargoTotal,ordenCompletada,ordenEnviada,numUnidades,idSuscriptor)" +
                     " VALUES (?,?,?,?,?) ", new String[] {"idorden"});
             pStmt.setDouble(1, cargo);
-            pStmt.setBoolean(2, ordComp);
+            pStmt.setInt(2, ordComp);
             pStmt.setBoolean(3, ordEnv);
             pStmt.setInt(4, numUni);
             pStmt.setInt(5, idSus);
             
             pStmt.executeUpdate();
             
-            //Obteniendo idOrden
             ResultSet generatedKeys = pStmt.getGeneratedKeys();
             if (null != generatedKeys && generatedKeys.next()) {
                 idOrden = generatedKeys.getInt(1);
-            }            
-            //////////////
-            //Utilizandos los vectores de fecha y cant y guardando RevistaOrden
-            int unidadesTotales = 0;
-            for(int i=0; i<vecCant.size(); i++){
-                guardaRevistaOrden(vecFecha.get(i), vecCant.get(i), idOrden);
-                unidadesTotales += vecCant.get(i);
             }
-
-            cargo = calculaCargo(costoRevista, porcentaje, unidadesTotales);
-
-            setCargoTotal(idOrden,cargo);
-            setNumUnidades(idOrden,unidadesTotales);
             return idOrden;
-            
-                    } catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Cannot update database" + e);
             return -1;
         }
