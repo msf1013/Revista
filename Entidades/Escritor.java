@@ -76,20 +76,7 @@ public class Escritor extends Cuenta {
             return -1;
         }   
     }
-    
-    // Metodo para crear un articulo pendiente a nombre del escritor
-//    public boolean crearArticulo(String titulo, String textoArticulo, String abstractText,
-//            Date fechaP, String estatus, Date fechaC, boolean validado) {
-//        
-//        ArticuloPendiente artP = new ArticuloPendiente();
-//        // fechaOrden, vector de fechas de revistas, vector de cantidad de revistas, booleano de orden completada
-//        // numero de unidades totales y id de cuenta
-//
-//        return artP.guardaArticuloPendiente(titulo,textoArticulo,abstractText,fechaP,estatus,
-//                fechaC,validado);
-//        
-//    }
-    
+        
     // Metodo que devuelve los IDs de todos los articulos pendientes
     // creador por una cuenta Escritor
     public Vector<Integer> obtenerArticulosPendientes(int idcuenta){

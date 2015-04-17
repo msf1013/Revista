@@ -529,33 +529,6 @@ public class Suscriptor extends Cuenta {
             return false;
         }
     }
-    /*
-    // Metodo que genera una orden de envio a partir de los datos del Suscriptor
-    public boolean solicitarOrden(int idcuenta, Date fechaActual, Vector<Date> vecFecha, Vector<Integer> vecCant){
-          
-        Orden ord = new Orden();
-        // fechaOrden, vector de fechas de revistas, vector de cantidad de revistas, booleano de orden completada
-        // numero de unidades totales y id de cuenta
-
-        int totalUnidades = 0;
-
-        for(int i=0; i<vecCant.size(); i++){
-            totalUnidades += vecCant.get(i);
-        }
-
-        return ord.guardaOrden(fechaActual,vecFecha,vecCant,false,totalUnidades,idcuenta);
-               
-    }
-    */
-    
-    // Metodo que realiza el pago de una orden de compra
-    // Puesto que no existe comunicacion con cuentas bancarias, el metodo
-    // simplemente acepta la transaccion
-    public boolean realizarPagoOrden(int idcuenta, int idorden){
-          
-        return true;
-               
-    }
     
     // Metodo de validacion de cuenta de pago
     // Compara el numero de cuenta y el banco con los almacenados en la cuenta
