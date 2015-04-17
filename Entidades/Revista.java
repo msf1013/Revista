@@ -76,6 +76,17 @@ public class Revista {
     }
     
     //Metodos set
+    public void setFechaDePublicacion(int idrevista, Date fecha){
+        try {
+            pStmt = conn.prepareStatement(
+                    "UPDATE revista SET fechaPublicacion = ? WHERE idrevista = ?");
+            pStmt.setDate(1,new java.sql.Date(fecha.getTime()));
+            pStmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println ("Cannot execute setFechaDePublicacion()" + e);
+        }
+    }
+    
     public void setCartaDeEditor(int idRevista, String sCarta) {
         try {
             String sqlString = "UPDATE revista SET cartaEditor = '" + sCarta + 
