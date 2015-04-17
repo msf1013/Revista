@@ -81,6 +81,7 @@ public class Revista {
             pStmt = conn.prepareStatement(
                     "UPDATE revista SET fechaPublicacion = ? WHERE idrevista = ?");
             pStmt.setDate(1,new java.sql.Date(fecha.getTime()));
+            pStmt.setInt(2,idrevista);
             pStmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println ("Cannot execute setFechaDePublicacion()" + e);

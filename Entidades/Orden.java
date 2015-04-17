@@ -126,6 +126,19 @@ public class Orden {
     }
     
     //Metodos set
+    
+    public void setFechaDeOrden(int idOrden, Date fecha){
+      try {
+         pStmt = conn.prepareStatement(
+                 "UPDATE Orden SET fechaDeOrden = ? WHERE idorden = ?");
+         pStmt.setDate(1, new java.sql.Date(fecha.getTime()));
+         pStmt.setInt(2, idOrden);
+         pStmt.executeUpdate();
+      } catch (SQLException e) {
+            System.out.println ("Cannot execute setFechaAprobacion(): " + e);
+      }
+   }
+    
     public void setCargoTotal(int idOrden, double cargo) {
         try {
             String sqlString = "UPDATE orden SET cargoTotal = '" + cargo + 

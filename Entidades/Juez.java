@@ -54,16 +54,6 @@ public class Juez extends Cuenta {
         }
     }
 
-    /*Obtener Articulos pendientes
-
-    select idArticuloPendiente
-    from ArticuloPendiente
-    where idArticuloPendiente not in (
-        select idArticuloPendiente
-        from Votos join Juez
-        where idJuez = 13
-    )*/
-
     public Vector<Integer> obtenerArticulosPendientes(int idJuez) {
         Vector<Integer> vecArticulos = new Vector<Integer>();
         int aux;
