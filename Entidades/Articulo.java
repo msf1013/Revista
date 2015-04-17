@@ -8,11 +8,19 @@ public class Articulo {
    Statement stmt;
    PreparedStatement pStmt;
 
+   /**
+    * Constructor de Articulo
+    * @param connect Conexion a la base de datos
+    */
    public Articulo(Conexion connect) {
       this.conn = connect.conn;
       this.stmt = connect.statem;
    }
 
+   /**
+    * Valida la existencia de un registro
+    * @param idArticulo ID del registro
+    */
    public boolean validar(int idArticulo){
       try {
          stmt.executeQuery ("SELECT idArticulo FROM Articulo WHERE idArticulo = " + idArticulo);
@@ -28,6 +36,16 @@ public class Articulo {
       return false;
    }
 
+   /**
+    * Guarda articulo en la base de datos
+    * @param idRevista ID de la revista a la que pertenece
+    * @param titulo Titulo del articulo
+    * @param textoArticulo Texto del articulo
+    * @param abstractArticulo Abstract del articulo
+    * @param idArticuloPendiente ID del articulo pendiente e el que se basa
+    * @param fechaAprobacion Fecha en la que se aprobo el articulo
+    * @return ID del registro nuevo, -1 si hubo algun error
+    */
    public int guardarArticulo(int idRevista, String titulo,
          String textoArticulo, String abstractArticulo, int idArticuloPendiente,
          Date fechaAprobacion){
@@ -57,7 +75,12 @@ public class Articulo {
          return -1;
       }   
    }
-   
+
+   /**
+    * Asigna el titulo a un articulo
+    * @param idArticulo ID del articulo
+    * @param titulo Titulo del articulo
+    */
    public void setTitulo(int idArticulo, String titulo){
       try {
          String s = "UPDATE Articulo SET titulo = '" + titulo + "' WHERE idArticulo = " + idArticulo;
@@ -67,6 +90,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el titulo de un articulo
+    * @param idArticulo ID del articulo
+    * @return  Titulo del articulo
+    */
    public String getTitulo(int idArticulo){
       String titulo = "";
       try {
@@ -82,6 +110,11 @@ public class Articulo {
       return titulo;
    }
 
+   /**
+    * Asigna el texto a un articulo
+    * @param idArticulo ID del articulo
+    * @param texto Texto del articulo
+    */
    public void setTexto(int idArticulo, String texto){
       try {
          String s = "UPDATE Articulo SET texto = '" + texto + "' WHERE idArticulo = " + idArticulo;
@@ -91,6 +124,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el texto de un articulo
+    * @param idArticulo ID del articulo
+    * @return  Texto del articulo
+    */
    public String getTexto(int idArticulo){
       String texto = "";
       try {
@@ -106,6 +144,11 @@ public class Articulo {
       return texto;
    }
 
+   /**
+    * Asigna el abstract del articulo
+    * @param idArticulo ID del articulo
+    * @param abstractArticulo Texto del articulo
+    */
    public void setAbstract(int idArticulo, String abstractArticulo){
       try {
          String s = "UPDATE Articulo SET abstract = '" + abstractArticulo + "' WHERE idArticulo = " + idArticulo;
@@ -115,6 +158,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el abstract de un articulo
+    * @param idArticulo ID del articulo
+    * @return  Abstract del articulo
+    */
    public String getAbstract(int idArticulo){
       String abstractArticulo = "";
       try {
@@ -130,6 +178,11 @@ public class Articulo {
       return abstractArticulo;
    }
    
+   /**
+    * Asigna la fecha de aprobacion del articulo
+    * @param idArticulo ID del articulo
+    * @param abstractArticulo Texto del articulo
+    */
    public void setFechaAprobacion(int idArticulo, Date fecha){
       try {
          pStmt = conn.prepareStatement(
@@ -142,6 +195,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene la fecha de aporbacion de un articulo
+    * @param idArticulo ID del articulo
+    * @return  Fecha de aprobacion del articulo
+    */
    public Date getFechAprobacion(int idArticulo){
       Date fecha = null;
       try {
@@ -157,6 +215,11 @@ public class Articulo {
       return fecha;
    }
 
+   /**
+    * Asigna el articulo pendiente del articulo
+    * @param idArticulo ID del articulo
+    * @param idArticuloPendiente ID del articulo pendiente al que pertenece
+    */
    public void setIdArticuloPendiente(int idArticulo, int idArticuloPendiente){
       try {
          String s = "UPDATE Articulo SET idArticuloPendiente = '" + idArticuloPendiente + "' WHERE idArticulo = " + idArticulo;
@@ -166,6 +229,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el id del articulo pendiente en el que se basa un articulo
+    * @param idArticulo ID del articulo
+    * @return  ID del articulo pendiente del articulo
+    */
    public int getIdArticuloPendiente(int idArticulo){
       int idArticuloPendiente = -1;
       try {
@@ -181,6 +249,11 @@ public class Articulo {
       return idArticuloPendiente;
    }
 
+   /**
+    * Asigna el id de la revista del articulo
+    * @param idArticulo ID del articulo
+    * @param idRevista ID de la revista
+    */
    public void setIdRevista(int idArticulo, int idRevista){
       try {
          String s = "UPDATE Articulo SET idRevista = '" + idRevista + "' WHERE idArticulo = " + idArticulo;
@@ -190,6 +263,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el id de la revista a la que pertenece un articulo
+    * @param idArticulo ID del articulo
+    * @return  ID de la revista
+    */
    public int getIdRevista(int idArticulo){
       int idRevista = -1;
       try {
@@ -205,6 +283,11 @@ public class Articulo {
       return idRevista;
    }
 
+   /**
+    * Asigna el abstract del articulo
+    * @param idArticulo ID del articulo
+    * @param idPredecesor ID del articulo predecesor al articulo
+    */
    public void setIdPredecesor(int idArticulo, int idPredecesor){
       try {
          String s = "UPDATE Articulo SET idPredecesor = '" + idPredecesor + "' WHERE idArticulo = " + idArticulo;
@@ -214,6 +297,11 @@ public class Articulo {
       }
    }
 
+   /**
+    * Obtiene el id del predecesor de un articulo
+    * @param idArticulo ID del articulo
+    * @return  ID del predecesor del articulo
+    */
    public int getIdPredecesor(int idArticulo){
       int idPredecesor = -1;
       try {
