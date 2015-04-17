@@ -108,6 +108,7 @@ public class Orden {
         }
         return iNumUni;
     }
+
     public int getIdSuscriptor(int idOrden) {
         int idSus = 0;
         try {
@@ -126,6 +127,18 @@ public class Orden {
     }
     
     //Metodos set
+    public void setFechaDeOrden(int idOrden, Date fecha){
+        try {
+            pStmt = conn.prepareStatement(
+                    "UPDATE orden SET fechaDeOrden = ? WHERE idcuenta = ?");
+            pStmt.setDate(1,new java.sql.Date(fecha.getTime()));
+            pStmt.setInt(2,idcuenta);
+            pStmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println ("Cannot execute setFechaDeCreacion()" + e);
+        }
+    }
+
     public void setCargoTotal(int idOrden, double cargo) {
         try {
             String sqlString = "UPDATE orden SET cargoTotal = '" + cargo + 
