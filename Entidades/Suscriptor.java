@@ -90,7 +90,7 @@ public class Suscriptor extends Cuenta {
         return esNuevo;
     }
     
-    public String getTipo() {
+    public String getTipoSuscripcion() {
         return tipo;
     }
     
@@ -155,7 +155,7 @@ public class Suscriptor extends Cuenta {
         esNuevo = es;
     }
     
-    public void setTipo(String tip){
+    public void setTipoSuscripcion(String tip){
         tipo = tip;
     }
     
@@ -233,7 +233,7 @@ public class Suscriptor extends Cuenta {
         return esN;
     }
     
-    public String getTipo(int idcuenta) {
+    public String getTipoSuscripcion(int idcuenta) {
         String sT = ""; 
         try {
             stmt.executeQuery ("SELECT tipo FROM suscriptor WHERE idcuenta = " + idcuenta);
@@ -243,7 +243,7 @@ public class Suscriptor extends Cuenta {
             rs.close();
             return (sT);
         } catch (SQLException e) {
-            System.out.println ("Cannot getTipo()" + e);
+            System.out.println ("Cannot getTipoSuscripcion()" + e);
         }
         return sT;
     }
@@ -382,12 +382,12 @@ public class Suscriptor extends Cuenta {
         }
     }
     
-    public void setTipo(int idcuenta, String tip){
+    public void setTipoSuscripcion(int idcuenta, String tip){
         try {
             String s = "UPDATE suscriptor SET tipo = '" + tip + "' WHERE idcuenta = " + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
-            System.out.println ("Cannot execute setTipo()" + e);
+            System.out.println ("Cannot execute setTipoSuscripcion()" + e);
         }
     }
     
@@ -579,7 +579,7 @@ public class Suscriptor extends Cuenta {
             sAux = vecSuscriptor.get(i);
             if(guardaSuscriptor(sAux.getNombre(),sAux.getApellidos(),sAux.getEmail(), sAux.getPasswd(),
                 sAux.getFechaDeCreacion(), sAux.getEsCorporativa(),
-                    sAux.getEsEncargada(), sAux.getEsNuevo(), sAux.getTipo(),
+                    sAux.getEsEncargada(), sAux.getEsNuevo(), sAux.getTipoSuscripcion(),
                         sAux.getFechaDeRenovacion(), sAux.getFechaDeVencimiento(),
                                 sAux.getNumeroCuentaPago(),sAux.getBanco(),
                                     sAux.getCargaMensual(), sAux.getDireccion(),
