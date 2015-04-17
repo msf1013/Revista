@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Analisis y modelacion de sistemas de software: Proyecto final
+ * Prof. Guillermo Jimenez
+ * Equipo #4   
+ * @authors Luis Mario Diaz, Humberto Makoto Morimoto,
+ * Eduardo Zardain, Mario Sergio Fuentes
  */
 
 import java.sql.Connection;
@@ -9,12 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 
-/**
- *
- * @author MarioDiaz
- */
+// Clase que modela los Resumenes vinculados a Articulos
 public class Resumen {
     //atributos para la conexion a la BD
     Connection conn;
@@ -57,7 +55,7 @@ public class Resumen {
     public int guardaResumen(String textoResumen) {
         try {
             pStmt = conn.prepareStatement("INSERT INTO resumen (textoResumen)" +
-                    " VALUES(?, ?) ", new String[] { "idresumen" });
+                    " VALUES(?) ", new String[] { "idresumen" });
             pStmt.setString(1, textoResumen);
             pStmt.executeUpdate();;
             

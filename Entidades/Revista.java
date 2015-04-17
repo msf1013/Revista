@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author MarioDiaz
+ * Analisis y modelacion de sistemas de software: Proyecto final
+ * Prof. Guillermo Jimenez
+ * Equipo #4   
+ * @authors Luis Mario Diaz, Humberto Makoto Morimoto,
+ * Eduardo Zardain, Mario Sergio Fuentes
  */
 
 import java.sql.*;
 import java.util.Date;
 import java.util.Vector;
 
+// Clase que modela contenido de Revistas
 public class Revista {
     //Atributos para conexion a la base de datos
     Connection conn;
@@ -77,6 +75,7 @@ public class Revista {
         
     }
     
+    //Metodos set
     public void setCartaDeEditor(int idRevista, String sCarta) {
         try {
             String sqlString = "UPDATE revista SET cartaEditor = '" + sCarta + 
@@ -87,6 +86,7 @@ public class Revista {
         }
     }
     
+    // Metodo que inserta una nuev Revista en base de datos
     public int guardaRevista(Date fecha, String cartaEditor) {
         try {
             pStmt = conn.prepareStatement("INSERT INTO revista (fechaPublicacion,cartaEditor)" +
@@ -107,7 +107,5 @@ public class Revista {
             return -1;
         }
     }
-    
-    //Metodos setter
     
 }

@@ -175,8 +175,6 @@ public class Orden {
             System.out.println("Cannot exceute setIdSuscriptor()" + e);
         }
     }
-
-    //HACER CAMBIOS EN GUARDAREVISTAORDEN Y CALCULACARGO
     
     //Metodo para calcular el cargo de la orden
 
