@@ -1,24 +1,29 @@
 /**
- * AMSS: Proyecto final
+ * Analisis y modelacion de sistemas de software: Proyecto final
  * Prof. Guillermo Jimenez
- * @author Mario Sergio Fuentes Juarez
+ * Equipo #4   
+ * @authors Luis Mario Diaz, Humberto Makoto Morimoto,
+ * Eduardo Zardain, Mario Sergio Fuentes
  */
 
 import java.sql.*;
 import java.util.Date;
 import java.util.Vector;
  
-// Clase hija de Cuenta para Suscriptores de la revista 
+// Subclase de Cuenta para cuentas de Suscriptores
 public class Suscriptor extends Cuenta {
+        
+    // Atributos usados en el constructor que crea
+    // una instancia de la clase con atributos en memoria
     
-    // Clase auxiliar de tipo Suscriptor  
+    // Atributos generales
     private String nombre;
     private String apellidos;
     private String email;
     private String passwd;
     private Date fechaDeCreacion;
-    // private String tipoUsuario;
     
+    // Artibutos propios de Suscriptor
     private boolean esCorporativa;
     private boolean esEncargada;
     private boolean esNuevo;
@@ -31,11 +36,13 @@ public class Suscriptor extends Cuenta {
     private String direccion;
     private int idEncargado;
     
+    // Metodo constructor con conexion
     public Suscriptor(Conexion connect) {
         this.conn = connect.conn;
         this.stmt = connect.statem;
     }
     
+    // Metodo constructor regular con inicialiacion de atributos
     public Suscriptor(String nom, String ape, String ema, String pas, Date fechaC,
         boolean esC, boolean esE, boolean esN, String tip, Date fechaR, Date fechaV,
                 String num, String ban, double carga, String dir, int idE) {
@@ -57,7 +64,7 @@ public class Suscriptor extends Cuenta {
         idEncargado = idE;
     }
     
-    // Metodos GET
+    // Metodos GET regulares
     public String getNombre() {
         return nombre;
     }
@@ -187,13 +194,14 @@ public class Suscriptor extends Cuenta {
         idEncargado = idE;
     }
     
-    // Metodos GET
+    // Metodos GET con conexion directa a base de datos
     public boolean getEsCorporativa(int idcuenta) {
         boolean esC = false; 
         try {
-            stmt.executeQuery ("SELECT esCorporativa FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT esCorporativa FROM suscriptor WHERE idcuenta = " 
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             esC = rs.getBoolean("esCorporativa");
             rs.close();
             return (esC);
@@ -206,9 +214,10 @@ public class Suscriptor extends Cuenta {
     public boolean getEsEncargada(int idcuenta) {
         boolean esE = false; 
         try {
-            stmt.executeQuery ("SELECT esEncargada FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT esEncargada FROM suscriptor WHERE idcuenta = " 
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             esE = rs.getBoolean("esEncargada");
             rs.close();
             return (esE);
@@ -221,9 +230,10 @@ public class Suscriptor extends Cuenta {
     public boolean getEsNuevo(int idcuenta) {
         boolean esN = false; 
         try {
-            stmt.executeQuery ("SELECT esNuevo FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT esNuevo FROM suscriptor WHERE idcuenta = " 
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             esN = rs.getBoolean("esNuevo");
             rs.close();
             return (esN);
@@ -236,9 +246,10 @@ public class Suscriptor extends Cuenta {
     public String getTipoSuscripcion(int idcuenta) {
         String sT = ""; 
         try {
-            stmt.executeQuery ("SELECT tipo FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT tipo FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             sT = rs.getString("tipo");
             rs.close();
             return (sT);
@@ -251,9 +262,10 @@ public class Suscriptor extends Cuenta {
     public Date getFechaDeRenovacion(int idcuenta) {
         Date dFecha = null; 
         try {
-            stmt.executeQuery ("SELECT fechaDeRenovacion FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT fechaDeRenovacion FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             dFecha = rs.getDate("fechaDeRenovacion");
             rs.close();
             return (dFecha);
@@ -266,9 +278,10 @@ public class Suscriptor extends Cuenta {
     public Date getFechaDeVencimiento(int idcuenta) {
         Date dFecha = null; 
         try {
-            stmt.executeQuery ("SELECT fechaDeVencimiento FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT fechaDeVencimiento FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             dFecha = rs.getDate("fechaDeVencimiento");
             rs.close();
             return (dFecha);
@@ -281,9 +294,10 @@ public class Suscriptor extends Cuenta {
     public String getNumeroCuentaPago(int idcuenta) {
         String sCuenta = ""; 
         try {
-            stmt.executeQuery ("SELECT numeroCuentaPago FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT numeroCuentaPago FROM suscriptor WHERE idcuenta = " 
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             sCuenta = rs.getString("numeroCuentaPago");
             rs.close();
             return (sCuenta);
@@ -296,9 +310,10 @@ public class Suscriptor extends Cuenta {
     public String getBanco(int idcuenta) {
         String sB = ""; 
         try {
-            stmt.executeQuery ("SELECT banco FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT banco FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             sB = rs.getString("banco");
             rs.close();
             return (sB);
@@ -311,9 +326,10 @@ public class Suscriptor extends Cuenta {
     public double getCargaMensual(int idcuenta) {
         double carga = 0.0; 
         try {
-            stmt.executeQuery ("SELECT cargaMensual FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT cargaMensual FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             carga = rs.getDouble("cargaMensual");
             rs.close();
             return (carga);
@@ -326,9 +342,10 @@ public class Suscriptor extends Cuenta {
     public String getDireccion(int idcuenta) {
         String sDir = ""; 
         try {
-            stmt.executeQuery ("SELECT direccion FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT direccion FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             sDir = rs.getString("direccion");
             rs.close();
             return (sDir);
@@ -341,9 +358,10 @@ public class Suscriptor extends Cuenta {
     public int getIdEncargado(int idcuenta) {
         int idE = -1; 
         try {
-            stmt.executeQuery ("SELECT idEncargado FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT idEncargado FROM suscriptor WHERE idcuenta = "
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            rs.next(); //Va al registro ya validado
+            rs.next();
             idE = rs.getInt("idEncargado");
             rs.close();
             if(idE == 0) idE = -1;
@@ -357,7 +375,8 @@ public class Suscriptor extends Cuenta {
     // Metodos SET
     public void setEsCorporativa(int idcuenta, boolean es){
         try {
-            String s = "UPDATE suscriptor SET esCorporativa = '" + es + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET esCorporativa = '" + es + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setEsCorporativa()" + e);
@@ -366,7 +385,8 @@ public class Suscriptor extends Cuenta {
     
     public void setEsEncargada(int idcuenta, boolean es){
         try {
-            String s = "UPDATE suscriptor SET esEncargada = '" + es + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET esEncargada = '" + es + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setEsEncargada()" + e);
@@ -375,7 +395,8 @@ public class Suscriptor extends Cuenta {
     
     public void setEsNuevo(int idcuenta, boolean es){
         try {
-            String s = "UPDATE suscriptor SET esNuevo = '" + es + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET esNuevo = '" + es + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setEsNuevo()" + e);
@@ -384,7 +405,8 @@ public class Suscriptor extends Cuenta {
     
     public void setTipoSuscripcion(int idcuenta, String tip){
         try {
-            String s = "UPDATE suscriptor SET tipo = '" + tip + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET tipo = '" + tip + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setTipoSuscripcion()" + e);
@@ -417,7 +439,8 @@ public class Suscriptor extends Cuenta {
     
     public void setNumeroCuentaPago(int idcuenta, String num){
         try {
-            String s = "UPDATE suscriptor SET numeroCuentaPago = '" + num + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET numeroCuentaPago = '" + num + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setNumeroCuentaPago()" + e);
@@ -426,7 +449,8 @@ public class Suscriptor extends Cuenta {
     
     public void setBanco(int idcuenta, String ban){
         try {
-            String s = "UPDATE suscriptor SET banco = '" + ban + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET banco = '" + ban + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setBanco()" + e);
@@ -435,7 +459,8 @@ public class Suscriptor extends Cuenta {
     
     public void setCargaMensual(int idcuenta, double carga){
         try {
-            String s = "UPDATE suscriptor SET cargaMensual = " + carga + " WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET cargaMensual = " + carga + " WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setCargaMensual()" + e);
@@ -444,7 +469,8 @@ public class Suscriptor extends Cuenta {
     
     public void setDireccion(int idcuenta, String dir){
         try {
-            String s = "UPDATE suscriptor SET direccion = '" + dir + "' WHERE idcuenta = " + idcuenta;
+            String s = "UPDATE suscriptor SET direccion = '" + dir + "' WHERE idcuenta = "
+                    + idcuenta;
             stmt.executeUpdate(s);
         } catch (SQLException e) {
             System.out.println ("Cannot execute setDireccion()" + e);
@@ -467,14 +493,14 @@ public class Suscriptor extends Cuenta {
         }
     }
     
-    // Metodo para guardar Suscriptor en base de datos
+    // Metodo para guardar Suscriptor en base de datos.
+    // Recibe como parametros todos los atributos de la clase
     public int guardaSuscriptor(String nom, String ape, String ema, String pas, 
             Date fecha, boolean esC, boolean esE, boolean esN, String tip,
                 Date fechaR, Date fechaV, String num, String ban, double carga,
                     String dir, int idE){
         try {
-            // insertar en Cuenta          
-            
+            // Insertar en Cuenta         
             int nuevoId=guardaCuenta(nom,ape,ema,pas,fecha,"Suscriptor");
             ResultSet generatedKeys = pStmt.getGeneratedKeys();
             if (null != generatedKeys && generatedKeys.next()) {
@@ -485,7 +511,7 @@ public class Suscriptor extends Cuenta {
                 return -1;
             }                
             
-            // insertar en Suscriptor
+            // Insertar en Suscriptor
             pStmt = conn.prepareStatement(
                 "INSERT INTO suscriptor (idcuenta,esCorporativa,esEncargada,esNuevo,tipo,fechaDeRenovacion,fechaDeVencimiento,numeroCuentaPago,banco,cargaMensual,direccion,idEncargado)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
@@ -500,9 +526,13 @@ public class Suscriptor extends Cuenta {
             pStmt.setString(9,ban);
             pStmt.setDouble(10,carga);
             pStmt.setString(11,dir);
+            // Si no es cuenta encargada, entonces se actualiza
+            // llave foranea de idEncargado
             if(idE != -1){
                 pStmt.setInt(12,idE);
             } else {
+                // Si la cuenta es encargada, entonces la llave foranea
+                // se almacena con valor NULL
                 pStmt.setNull(12,java.sql.Types.NULL);
             }
             pStmt.executeUpdate();
@@ -513,7 +543,9 @@ public class Suscriptor extends Cuenta {
         }   
     }
     
-    // Metodo que actualiza la fecha de renovacion al pagar la suscripcion
+    // Metodo que actualiza la fecha de renovacion al pagar la suscripcion,
+    // y recibe como parametro el ID de la cuenta Suscriptor, la fecha de
+    // renovacion y la nueva fecha de vencimiento
     public boolean realizarPagoSuscripcion(int idcuenta, Date fechaR, Date fechaV){
         try {
             pStmt = conn.prepareStatement(
@@ -530,12 +562,13 @@ public class Suscriptor extends Cuenta {
         }
     }
     
-    // Metodo de validacion de cuenta de pago
+    // Metodo de validacion de cuenta de pago.
     // Compara el numero de cuenta y el banco con los almacenados en la cuenta
-    // del usuario
+    // del usuario.
     public boolean validarCuentaPago(int idcuenta, String num, String ban){
         try {
-            stmt.executeQuery ("SELECT numeroCuentaPago, banco FROM suscriptor WHERE idcuenta = " + idcuenta);
+            stmt.executeQuery ("SELECT numeroCuentaPago, banco FROM suscriptor WHERE idcuenta = " 
+                    + idcuenta);
             ResultSet rs = stmt.getResultSet();
             if (rs.next()) { //Va al primer registro si lo hay
                 String sNum = rs.getString ("numeroCuentaPago");
@@ -551,19 +584,21 @@ public class Suscriptor extends Cuenta {
         return false;
     }
     
-    // Metodo que genera un conjunto de cuentas corporativas dependientes
-    // a aprtir de una cuenta corporativa encargada
+    // Metodo que inserta un conjunto de cuentas corporativas dependientes
+    // a aprtir de una cuenta corporativa encargada.
+    // Recibe un vector de cuentas de tipo Suscriptor.
     public boolean crearCuentasCorporativasDependientes(int idcuenta,
             Vector<Suscriptor> vecSuscriptor){
         
-        // validar que la cuenta recibida es corporativa y encargada
+        // Validar que la cuenta recibida es corporativa y encargada
         try {
             stmt.executeQuery ("SELECT esCorporativa, esEncargada FROM suscriptor WHERE idcuenta = " + idcuenta);
             ResultSet rs = stmt.getResultSet();
-            if (rs.next()) { //Va al primer registro si lo hay
+            if (rs.next()) {
                 boolean esC = rs.getBoolean ("esCorporativa");
                 boolean esE = rs.getBoolean ("esEncargada");
                 rs.close(); 
+                // Se verifica que sea corporativa y encargada
                 if ( !(esC && esE) ){
                     return false;
                 }
@@ -574,9 +609,11 @@ public class Suscriptor extends Cuenta {
           System.out.println ("Cannot execute crearCuentasCorporativasDependientes()" + e);
         }
         
+        // Se inserta uno por uno cada elemento del vector en la base de datos
         Suscriptor sAux;
         for (int i=0; i<vecSuscriptor.size(); i++){
             sAux = vecSuscriptor.get(i);
+            // Se verifica insercion correcta de cada elemento
             if(guardaSuscriptor(sAux.getNombre(),sAux.getApellidos(),sAux.getEmail(), sAux.getPasswd(),
                 sAux.getFechaDeCreacion(), sAux.getEsCorporativa(),
                     sAux.getEsEncargada(), sAux.getEsNuevo(), sAux.getTipoSuscripcion(),
@@ -596,7 +633,9 @@ public class Suscriptor extends Cuenta {
         Vector<Integer> vecIds = new Vector<Integer>();
         int aux;
         try {
-            ResultSet rs = stmt.executeQuery ("SELECT idOrden FROM orden WHERE idsuscriptor = " + idcuenta);
+            ResultSet rs = stmt.executeQuery ("SELECT idOrden FROM orden WHERE idsuscriptor = "
+                    + idcuenta);
+            // Iteracion en el result set para obtener los ID's
             while( rs.next() ){
                 aux = rs.getInt(1);
                 vecIds.add(aux);
@@ -609,12 +648,14 @@ public class Suscriptor extends Cuenta {
     }
     
     // Metodo que devuelve los IDs de todas las cuentas dependientes
-    // a una cuenta corporativa encargada de tipo Suscriptor
+    // de una cuenta corporativa encargada de tipo Suscriptor
     public Vector<Integer> obtenerCuentasDependientes(int idcuenta){
         Vector<Integer> vecIds = new Vector<Integer>();
         int aux;
         try {
-            ResultSet rs = stmt.executeQuery ("SELECT idcuenta FROM suscriptor WHERE idencargado = " + idcuenta);
+            ResultSet rs = stmt.executeQuery ("SELECT idcuenta FROM suscriptor WHERE idencargado = "
+                    + idcuenta);
+            // Iteracion en el result set para obtener los ID's
             while( rs.next() ){
                 aux = rs.getInt(1);
                 vecIds.add(aux);

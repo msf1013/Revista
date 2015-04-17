@@ -1,30 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Analisis y modelacion de sistemas de software: Proyecto final
+ * Prof. Guillermo Jimenez
+ * Equipo #4   
+ * @authors Luis Mario Diaz, Humberto Makoto Morimoto,
+ * Eduardo Zardain, Mario Sergio Fuentes
  */
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
-/**
- *
- * @author E15
- */
+// Clase que modela un objeto de conexion con una base de datos de MySQL
+// a raves del conector JDBC
 public class Conexion {
-   public Connection conn;
-   public Statement statem;
-
-   Conexion(){
-      try {
-        String userName = "root";
-        String password = "";
-        String url = "jdbc:mysql://localhost:3306/revista?zeroDateTimeBehavior=convertToNull";
-        Class.forName ("com.mysql.jdbc.Driver").newInstance();
-        conn = DriverManager.getConnection (url, userName, password);    
-        statem = conn.createStatement();
-      }catch (Exception e) { System.out.println ("Cannot connect to database server"); }
-   }
+    // atributos de conexion
+    public Connection conn;
+    public Statement statem;
+    
+    // Constructor
+    Conexion(){
+        try {
+            String userName = "root";
+            String password = "";
+            // direccion de base de datos en entorno de pruebas
+            String url = 
+                    "jdbc:mysql://localhost:3306/revista?zeroDateTimeBehavior=convertToNull";
+            Class.forName ("com.mysql.jdbc.Driver").newInstance();
+            conn = DriverManager.getConnection (url, userName, password);    
+            statem = conn.createStatement();
+        }catch (Exception e) {
+            System.out.println ("Cannot connect to database server");
+        }
+    }    
 }
