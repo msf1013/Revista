@@ -89,7 +89,7 @@ public class ArticuloPendiente {
    public int getVotosAFavor(int idArticuloPendiente) {
       int votos = -1;
       try {
-         stmt.executeQuery("SELECT COUNT(voto) FROM Votos WHERE idArticuloPendiente = " + idArticuloPendiente + " AND voto = 'APROBADO'");
+         stmt.executeQuery("SELECT COUNT(voto) FROM Votos WHERE idArticuloPendiente = " + idArticuloPendiente + " AND voto = 1");
 
          ResultSet rs = stmt.getResultSet();
          if (rs.next()) { //Va al primer registro si lo hay
@@ -105,7 +105,7 @@ public class ArticuloPendiente {
    public int getVotosEncontra(int idArticuloPendiente) {
       int votos = -1;
       try {
-         stmt.executeQuery("SELECT COUNT(voto) FROM Votos WHERE idArticuloPendiente = " + idArticuloPendiente + " AND voto = 'RECHAZADO'");
+         stmt.executeQuery("SELECT COUNT(voto) FROM Votos WHERE idArticuloPendiente = " + idArticuloPendiente + " AND voto = 0");
 
          ResultSet rs = stmt.getResultSet();
          if (rs.next()) { //Va al primer registro si lo hay
@@ -116,6 +116,42 @@ public class ArticuloPendiente {
          System.out.println("Cannot getVoto(): " + e);
       }
       return votos;
+   }
+
+   public Vector<String> getVotos(int idArticuloPendiente) {
+      Vector<String> votos = new Vector<String>();
+      try {
+         pStmt = conn.prepareStatement(
+            "SELECT voto FROM Votos WHERE idArticuloPendiente = ?");
+
+         pStmt.setInt(1, idArticuloPendiente);
+
+         ResultSet rs = pStmt.executeQuery();
+         while (rs.next()) {
+            votos.add(rs.getString("voto"));
+         }
+      } catch (Exception e) {
+         System.out.println ("Cannot getVotos(): " + e );
+      }
+      return votos;
+   }
+
+   public Vector<String> getComentarios(int idArticuloPendiente) {
+      Vector<String> comentarios = new Vector<String>();
+      try {
+         pStmt = conn.prepareStatement(
+            "SELECT comentario FROM Comentarios WHERE idArticuloPendiente = ?");
+
+         pStmt.setInt(1, idArticuloPendiente);
+
+         ResultSet rs = pStmt.executeQuery();
+         while (rs.next()) {
+            comentarios.add(rs.getString("comentario"));
+         }
+      } catch (Exception e) {
+         System.out.println ("Cannot getComentarios(): " + e );
+      }
+      return comentarios;
    }
    
    public void setTitulo(int idArticuloPendiente, String titulo){

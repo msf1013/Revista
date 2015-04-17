@@ -66,19 +66,19 @@ public class Administrador extends Cuenta {
       return cuentas;
    }
 
-   /*
+   
    public boolean crearJuez(String nombre, String apellidos, String email, String password, int numJuez){
       try {
          Cuenta cuenta = new Cuenta(new Conexion());
          int id = cuenta.guardaCuenta(nombre, apellidos, email, password, new Date(), "juez");
          Juez juez = new Juez(new Conexion());
-         juez.guardarJuez(id, numJuez);
+         juez.guardaJuez(numJuez);
          return true;
       } catch (Exception e) {
          System.out.println("Cannot crearJuez(): " + e);
          return false;
       }
-   }*/
+   }
 
    public boolean eliminarCuenta(int idCuenta) {
       try {
@@ -95,17 +95,17 @@ public class Administrador extends Cuenta {
       }
    }
 
-   /*
+   
    public boolean publicarCarta(String carta, int idRevista) {
       try {
-         Revista revista = new Revista();
-         revista.setCarta(idRevista, carta);
+         Revista revista = new Revista(new Conexion());
+         revista.setCartaDeEditor(idRevista, carta);
          return true;
       } catch (Exception e) {
          System.out.println("Cannot publicarCarta(): " + e);
          return false;
       }
-   }*/
+   }
 
    public void validarArticulo(int idArticulo) {
       ArticuloPendiente articulo = new ArticuloPendiente(new Conexion());
