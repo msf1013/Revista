@@ -5,11 +5,19 @@ import java.util.Date;
 
 public class Administrador extends Cuenta {
 
+   /**
+    * Constructor de Administardor
+    * @param connect Conexion a la base de datos
+    */
    public Administrador(Conexion connect) {
       this.conn = connect.conn;
       this.stmt = connect.statem;
    }
 
+   /**
+    * Valida la existencia de un registro
+    * @param idCuenta ID del registro
+    */
    public boolean validar(int idCuenta){
       try {
          stmt.executeQuery ("SELECT idCuenta FROM Administrador WHERE idCuenta = " + idCuenta);
@@ -25,7 +33,7 @@ public class Administrador extends Cuenta {
       return false;
    }
 
-   public int guardarAdministrador(int idCuenta){
+   /*public int guardarAdministrador(int idCuenta){
       try {
          pStmt = conn.prepareStatement(
                "INSERT INTO Administrador(idCuenta) VALUES (?)");
@@ -45,8 +53,13 @@ public class Administrador extends Cuenta {
          System.out.println ("Cannot update database: " + e );
          return -1;
       }   
-   }
+   }*/
 
+   /**
+    * Busca una cuenta de usuario y regresa un vector de ids
+    * @param cuenta String con un nombre o apellido de un usuario
+    * @return Vector con los ids de los resultados
+    */
    public Vector<Integer> buscarCuenta(String cuenta){
       Vector<Integer> cuentas = new Vector<Integer>();
       try {
@@ -66,7 +79,16 @@ public class Administrador extends Cuenta {
       return cuentas;
    }
 
-   
+   /**
+    * Crea un nuevo usuario de tipo juez
+    * @param nombre Nombre del juez
+    * @param apellidos Apellidos del juez
+    * @param email Correo electronico del juez
+    * @param password Contrasena del juez
+    * @param fecha Fecha de creación del registro
+    * @param numJuez Numero que se le asigna al juez
+    * @return ID del juez creado, -1 si hubo error
+    */
    public int crearJuez(String nombre, String apellidos, String email, String password, Date fecha, int numJuez){
       try {
          Juez juez = new Juez(new Conexion());
@@ -77,6 +99,12 @@ public class Administrador extends Cuenta {
       }
    }
 
+   /**
+    * Elimina una cuenta de usuario
+    * @param idCuenta ID de la cuenta a eliminar
+    * @return Verdadero si la cuenta se elimino exitosamente, falso si hubo
+    * algun error
+    */
    public boolean eliminarCuenta(int idCuenta) {
       try {
          pStmt = conn.prepareStatement(
@@ -92,7 +120,13 @@ public class Administrador extends Cuenta {
       }
    }
 
-   
+   /**
+    * Agrega la carta de editor a una revista
+    * @param carta Texto de la carta
+    * @param idRevista ID de la revista
+    * @return Verdadero si la carta se agrego exitisamente, falso si hubo algun
+      error
+    */
    public boolean publicarCarta(String carta, int idRevista) {
       try {
          Revista revista = new Revista(new Conexion());
@@ -104,6 +138,10 @@ public class Administrador extends Cuenta {
       }
    }
 
+   /**
+    * Valida un articulo para ser publicado
+    * @param idArticulo ID del articulo
+    */
    public void validarArticulo(int idArticulo) {
       ArticuloPendiente articulo = new ArticuloPendiente(new Conexion());
       articulo.setValidado(idArticulo, true);
