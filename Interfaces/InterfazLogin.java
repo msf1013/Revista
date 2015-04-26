@@ -37,27 +37,24 @@ public class InterfazLogin extends HttpServlet {
 
         
     String operacion = request.getParameter("operacion");
-    if(operacion == "" || operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion
+    if(operacion != null && operacion.equals("validar")){ // El menu nos envia un parametro para indicar el inicio de una transaccion
+      out.println("<p>Entramos al segundo if</p>");
+      out.println(operacion); 
+      cc = new ControlValidacion();
+      //La funcion trim() elimina espacios antes y despues del valor
+      int idcuenta = cc.validarCuenta(email,passwd);
+      if (idcuenta == -1){
+         desplegarLogin();    
+      } else {
+          session.setAttribute("idcuenta", idcuenta);
+         desplegarInicio(session);
+         response.sendRedirect("Inicio");
+      }
+    } else {
       out.println("<p>Entramos al primer if</p>");
       out.println(operacion); 
       desplegarLogin();
-    } else if(operacion.equals("validar")){
-        out.println("<p>Entramos al segundo if</p>");
-        out.println(operacion); 
-        cc = new ControlValidacion();
-        //La funcion trim() elimina espacios antes y despues del valor
-        int idcuenta = cc.validarCuenta(email,passwd);
-        if (idcuenta == -1){
-           desplegarLogin();    
-        } else {
-            session.setAttribute("idcuenta", idcuenta);
-           desplegarInicio(session);
-           response.sendRedirect("Inicio");
-        }
-    }
-    out.println("<p>La operacion</p>");
-    out.println(operacion); 
-    
+    } 
   }
   
   public void desplegarLogin(){  
