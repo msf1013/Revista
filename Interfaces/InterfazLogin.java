@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.*;
 import controles.ControlValidacion;
 
-public class InterfazConsulta extends HttpServlet {
+public class InterfazLogin extends HttpServlet {
   HttpServletResponse thisResponse;
   HttpServletRequest thisRequest;
   PrintWriter out;
@@ -31,24 +31,31 @@ public class InterfazConsulta extends HttpServlet {
     out.println("<h2>Login</h2>");
     //out.println("<h3>Consultar saldo</h3>");
 
-    String email = session.getAttribute("email").toString();
-    String passwd = session.getAttribute("passwd").toString();
+    out.println("<p>Vamos a obtener atributos</p>");
+    String email = request.getParameter("email");
+    String passwd = request.getParameter("passwd");
 
         
     String operacion = request.getParameter("operacion");
-    if(operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion
-      desplegarLogin();  
-    }else if(operacion.equals("validar")){
-       cc = new ControlValidacion();
+    if(operacion == "" || operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion
+      out.println("<p>Entramos al primer if</p>");
+      out.println(operacion); 
+      desplegarLogin();
+    } else if(operacion.equals("validar")){
+        out.println("<p>Entramos al segundo if</p>");
+        out.println(operacion); 
+        cc = new ControlValidacion();
         //La funcion trim() elimina espacios antes y despues del valor
         int idcuenta = cc.validarCuenta(email,passwd);
         if (idcuenta == -1){
            desplegarLogin();    
         } else {
             session.setAttribute("idcuenta", idcuenta);
-           desplegarInicio();
+           desplegarInicio(session);
         }
-    } 
+    }
+    out.println("<p>La operacion</p>");
+    out.println(operacion); 
     
   }
   
@@ -82,9 +89,10 @@ public class InterfazConsulta extends HttpServlet {
     }
   }*/
   
-  public void desplegarInicio(){ 
+  public void desplegarInicio(HttpSession session){ 
 
-    out.println("<p>"+session.getAttribute("idcuenta").toString();+"</p>");
+    out.println("<p>"+session.getAttribute("idcuenta").toString()+"</p>");
+    out.println("<p>Estamos en desplegarInicio()</p>");
     out.println("</BODY>");
     out.println("</HTML>");
         
