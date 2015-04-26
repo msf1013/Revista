@@ -6,6 +6,8 @@
  * Eduardo Zardain, Mario Sergio Fuentes
  */
 
+package entidades;
+
 import java.sql.*;
 import java.io.*;
 import java.util.Vector;

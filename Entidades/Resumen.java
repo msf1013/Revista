@@ -6,6 +6,8 @@
  * Eduardo Zardain, Mario Sergio Fuentes
  */
 
+package entidades;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

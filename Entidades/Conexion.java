@@ -6,6 +6,8 @@
  * Eduardo Zardain, Mario Sergio Fuentes
  */
 
+package entidades;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -18,7 +20,7 @@ public class Conexion {
     public Statement statem;
     
     // Constructor
-    Conexion(){
+    public Conexion(){
         try {
             String userName = "root";
             String password = "";

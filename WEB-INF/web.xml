@@ -11,15 +11,15 @@
      -->
 
     <servlet>
-      <servlet-name>Extraer</servlet-name>
-      <servlet-class>interfaces.InterfazExtraccion</servlet-class>
+      <servlet-name>Login</servlet-name>
+      <servlet-class>interfaces.InterfazLogin</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Extraer</servlet-name>
-        <url-pattern>/Extraer</url-pattern>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
 
-    <servlet>
+<!--    <servlet>
       <servlet-name>Transferencia</servlet-name>
       <servlet-class>interfaces.InterfazTransferencia</servlet-class>
     </servlet>
@@ -35,7 +35,7 @@
     <servlet-mapping>
         <servlet-name>Consulta</servlet-name>
         <url-pattern>/Consulta</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 
 
 
