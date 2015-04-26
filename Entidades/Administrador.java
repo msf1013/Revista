@@ -20,6 +20,7 @@ public class Administrador extends Cuenta {
     * Valida la existencia de un registro
     * @param idCuenta ID del registro
     */
+   /*
    public boolean validar(int idCuenta){
       try {
          stmt.executeQuery ("SELECT idCuenta FROM Administrador WHERE idCuenta = " + idCuenta);
@@ -33,7 +34,7 @@ public class Administrador extends Cuenta {
          }
       } catch (SQLException e) {}
       return false;
-   }
+   }*/
 
    /*public int guardarAdministrador(int idCuenta){
       try {
