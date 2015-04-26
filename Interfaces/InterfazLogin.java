@@ -52,6 +52,7 @@ public class InterfazLogin extends HttpServlet {
         } else {
             session.setAttribute("idcuenta", idcuenta);
            desplegarInicio(session);
+           response.sendRedirect("Inicio");
         }
     }
     out.println("<p>La operacion</p>");

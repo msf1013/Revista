@@ -18,6 +18,14 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+    <servlet>
+      <servlet-name>Inicio</servlet-name>
+      <servlet-class>interfaces.InterfazInicio</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Inicio</servlet-name>
+        <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
 
 <!--    <servlet>
       <servlet-name>Transferencia</servlet-name>
