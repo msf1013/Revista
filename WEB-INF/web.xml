@@ -15,16 +15,24 @@
       <servlet-class>interfaces.InterfazLogin</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
+      <servlet-name>Login</servlet-name>
+      <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet>
       <servlet-name>Inicio</servlet-name>
       <servlet-class>interfaces.InterfazInicio</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Inicio</servlet-name>
-        <url-pattern>/Inicio</url-pattern>
+      <servlet-name>Inicio</servlet-name>
+      <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>Resumenes</servlet-name>
+      <servlet-class>interfaces.InterfazSitioWeb</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Resumenes</servlet-name>
+      <url-pattern>/Resumenes</url-pattern>
     </servlet-mapping>
 
 <!--    <servlet>
