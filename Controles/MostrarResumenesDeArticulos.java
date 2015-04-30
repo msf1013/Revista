@@ -22,6 +22,9 @@ public class MostrarResumenesDeArticulos{
 		Vector<Integer> idArticulos = new Vector<Integer>();
 		String textoResumen;
 		String titulo;
+		int idArticuloPendiente;
+		int idEscritor;
+		String nombre;
 
 		try{
 			conn.statem.executeQuery("SELECT * FROM resumen");
@@ -33,11 +36,24 @@ public class MostrarResumenesDeArticulos{
 				idArticulos.add(idArticulo);
 			}
 			for(int i = 0; i < idResumenes.size(); i++){
-				conn.statem.executeQuery("SELECT titulo FROM articulo WHERE idArticulo = " + idArticulos.elementAt(i));
+				conn.statem.executeQuery("SELECT * FROM articulo WHERE idArticulo = " + idArticulos.elementAt(i));
 				rs = conn.statem.getResultSet();
 				rs.next();
 				titulo = rs.getString("titulo");
 				resumenes.add(titulo);
+
+				idArticuloPendiente = rs.getInt("idArticuloPendiente");
+				conn.statem.executeQuery("SELECT idEscritor FROM articulopendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
+				rs = conn.statem.getResultSet();
+				rs.next();
+
+				idEscritor = rs.getInt("idEscritor");
+				conn.statem.executeQuery("SELECT CONCAT(nombre, ' ', apellidos) AS nombre FROM cuenta WHERE idCuenta = " + idEscritor);
+				rs = conn.statem.getResultSet();
+				rs.next();
+
+				nombre = rs.getString("nombre");
+				resumenes.add(nombre);
 
 				textoResumen = resumen.getResumen(idResumenes.elementAt(i));
 				resumenes.add(textoResumen);
@@ -45,6 +61,7 @@ public class MostrarResumenesDeArticulos{
 			return resumenes;
 		}
 		catch(SQLException e){
+			System.out.println("UP");
 			return null;
 		}
 	}

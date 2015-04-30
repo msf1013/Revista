@@ -59,14 +59,14 @@ public class InterfazSitioWeb extends HttpServlet {
 
     Vector<String> resumenes = mostrarResumenes.mostrarResumenes();
 
-    for(int i = 0; i < resumenes.size(); i += 2){
+    for(int i = 0; i < resumenes.size(); i += 3){
       out.println("<tr>");
       out.println("<td style=\"width:100%;\">");
       out.println("<form>");
       out.println("<fieldset>");
       out.println("<legend style=\"text-align:center\"><b>" + resumenes.elementAt(i) +"</b></legend>");
-      out.println("<p><i>Autor</i></p>");
-      out.println("<p>" + resumenes.elementAt(i + 1) + "</p>");
+      out.println("<p><i>" + resumenes.elementAt(i + 1) + "</i></p>");
+      out.println("<p>" + resumenes.elementAt(i + 2) + "</p>");
       out.println("</fieldset>");
       out.println("</form>");
       out.println("</td>");
