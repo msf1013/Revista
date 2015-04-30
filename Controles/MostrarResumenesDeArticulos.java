@@ -61,7 +61,6 @@ public class MostrarResumenesDeArticulos{
 			return resumenes;
 		}
 		catch(SQLException e){
-			System.out.println("UP");
 			return null;
 		}
 	}
