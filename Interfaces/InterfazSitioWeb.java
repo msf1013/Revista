@@ -1,6 +1,6 @@
 package interfaces;
 
-import controles.MostrarResumenesDeArticulos;
+import controles.ControlMostrarResumenesDeArticulos;
 
 import controles.*;
 import javax.servlet.*;
@@ -12,12 +12,12 @@ public class InterfazSitioWeb extends HttpServlet {
   HttpServletResponse thisResponse;
   HttpServletRequest thisRequest;
   PrintWriter out;
-  MostrarResumenesDeArticulos mostrarResumenes;
+  ControlMostrarResumenesDeArticulos mostrarResumenes;
   
   //Es importante observar que todos los metodos definen la operacion GET para
   //que el metodo doGet sea el que se ejecuta al presionar el boton "Enviar". 
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    mostrarResumenes = new MostrarResumenesDeArticulos();
+    mostrarResumenes = new ControlMostrarResumenesDeArticulos();
 
     thisResponse = response;
     thisRequest = request;

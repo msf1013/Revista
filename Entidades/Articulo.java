@@ -319,4 +319,92 @@ public class Articulo {
       }
       return idPredecesor;
    }
+
+   public Vector<String> getArticulos(){
+        Vector<String> articulos = new Vector<String>();
+        Vector<Integer> idArticulos = new Vector<Integer>();
+        String abstractArticulo;
+        String titulo;
+        int idArticuloPendiente;
+        int idEscritor;
+        String nombre;
+
+        try{
+            stmt.executeQuery("SELECT * FROM articulo");
+            ResultSet rs = stmt.getResultSet();
+            while(rs.next()){
+                int idArticulo = rs.getInt("idArticulo");
+                idArticulos.add(idArticulo);
+            }
+            for(int i = 0; i < idArticulos.size(); i++){
+                stmt.executeQuery("SELECT * FROM articulo WHERE idArticulo = " + idArticulos.elementAt(i));
+                rs = stmt.getResultSet();
+                rs.next();
+                titulo = rs.getString("titulo");
+                abstractArticulo = rs.getString("abstract");
+                articulos.add(titulo);
+
+                idArticuloPendiente = rs.getInt("idArticuloPendiente");
+                stmt.executeQuery("SELECT idEscritor FROM articulopendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
+                rs = stmt.getResultSet();
+                rs.next();
+
+                idEscritor = rs.getInt("idEscritor");
+                stmt.executeQuery("SELECT CONCAT(nombre, ' ', apellidos) AS nombre FROM cuenta WHERE idCuenta = " + idEscritor);
+                rs = stmt.getResultSet();
+                rs.next();
+
+                nombre = rs.getString("nombre");
+                articulos.add(nombre);
+
+                articulos.add(abstractArticulo);
+
+                rs.close();
+            }
+            return articulos;
+        }
+        catch(SQLException e){
+            return null;
+        }
+    }
+
+    public Vector<String> getInformacionArticulo(String titulo){
+        int idArticulo;
+        String texto;
+        int idArticuloPendiente;
+        int idEscritor;
+        String nombre;
+        Vector<String> articulo = new Vector<String>();
+
+        try{
+          stmt.executeQuery("SELECT * FROM articulo WHERE titulo = '" + titulo + "'");
+          ResultSet rs = stmt.getResultSet();
+          rs.next();
+          idArticulo = rs.getInt("idArticulo");
+
+          texto = rs.getString("textoArticulo");
+
+          idArticuloPendiente = rs.getInt("idArticuloPendiente");
+          stmt.executeQuery("SELECT idEscritor FROM articulopendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
+          rs = stmt.getResultSet();
+          rs.next();
+
+          idEscritor = rs.getInt("idEscritor");
+          stmt.executeQuery("SELECT CONCAT(nombre, ' ', apellidos) AS nombre FROM cuenta WHERE idCuenta = " + idEscritor);
+          rs = stmt.getResultSet();
+          rs.next();
+
+          nombre = rs.getString("nombre");
+          articulo.add(nombre);
+
+          articulo.add(texto);
+
+          rs.close();
+
+          return articulo;
+        }
+        catch(SQLException e){
+          return null;
+        }
+    }
 }
