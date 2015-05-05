@@ -41,7 +41,7 @@ public class InterfazVisualizarEstatus extends HttpServlet {
           out.println("<a href=\"index_escritor.html\">Regresar a Pantalla de Escritor</a>");
     } else {
       out.println("<p>Lo sentimos, usted no tiene permisos de Escritor.</p>");
-      out.println("<a href=\"index_escritor.html\">Regresar a Inicio</a>");
+      out.println("<a href=\"index.html\">Regresar a Inicio</a>");
     }
     out.println("</BODY>");
     out.println("</HTML>");
