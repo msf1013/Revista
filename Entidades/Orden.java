@@ -195,7 +195,7 @@ public class Orden {
     //Metodo para calcular el cargo de la orden
 
     private double calculaCargo(double costoRevista, double porcentaje, int cantTotal) {        
-        return (double) cantTotal * costoRevista * (1 - porcentaje); 
+        return (double) costoRevista * (1 - porcentaje); 
     }
 
 

@@ -46,6 +46,7 @@ public class InterfazLogin extends HttpServlet {
         } else {
            session.setAttribute("idcuenta", idcuenta);
            String tipoCuenta = cc.getTipoUsuario(idcuenta);
+           session.setAttribute("tipocuenta", tipoCuenta);
            //desplegarInicio(session);
            if (tipoCuenta.equals("Escritor")) {
             response.sendRedirect("index_escritor.html"); 
@@ -72,7 +73,7 @@ public class InterfazLogin extends HttpServlet {
     out.println("<p>Ingrese su correo electronico</p>"); // letrero de correo
     out.println("<input type=\"text\" name=\"email\"/>"); // input de correo
     out.println("<p>Ingrese su contrasenia</p>"); // letrero de passwd
-    out.println("<input type=\"text\" name=\"passwd\"/>"); // input de passwd
+    out.println("<input type=\"password\" name=\"passwd\"/>"); // input de passwd
     out.println("<p><input type=\"submit\" value=\"Enviar\"></p>");
     out.println("</form>");
  

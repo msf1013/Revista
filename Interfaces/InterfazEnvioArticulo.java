@@ -50,7 +50,7 @@ public class InterfazEnvioArticulo extends HttpServlet {
         //String tipo = request.getParameter("tipo");
         int id = (int)session.getAttribute("idcuenta");
         cc = new ControlEnvioArticulo();
-        if (cc.getTipoUsuario(id).equals("Escritor")){
+        if (session.getAttribute("tipocuenta").equals("Escritor")){
               if ( cc.crearArticulo(titulo,texto,abstra,new Date(anio,mes,dia),"Pendiente",new Date(),false,id) != -1 ) {
                 out.println("<p>Gracias, su articulo ha sido propuesto.</p>");
               } else {

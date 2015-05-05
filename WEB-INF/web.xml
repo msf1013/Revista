@@ -100,6 +100,15 @@
         <url-pattern>/VisualizarEstatus</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+      <servlet-name>Solicitudes</servlet-name>
+      <servlet-class>interfaces.InterfazSolicitudNumerosAnteriores</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Solicitudes</servlet-name>
+        <url-pattern>/Solicitudes</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
      <servlet-name>default</servlet-name>
      <url-pattern>*.html</url-pattern>
