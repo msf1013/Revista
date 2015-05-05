@@ -25,44 +25,53 @@ public class InterfazArticulos extends HttpServlet {
     thisRequest = request;
     thisResponse.setContentType("text/html");
     out = thisResponse.getWriter();
-    //Preparar el encabezado de la pagina Web de respuesta
-    out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
-    out.println("<HTML>");
-    out.println("<HEAD>");
-    out.println("<META http-equiv=Content-Type content=\"text/html\">");
-    out.println("</HEAD>");
-    out.println("<BODY>");
-    out.println("<table border=\"1\" style=\"width:100%; text-align:center;\">");
-    out.println("<tr>");
-    out.println("<td style=\"width:12%; vertical-align:middle;\"><h3 style=\"display:inline\">SEB&B</h3></td>");
-    out.println("<td style=\"width:12%; vertical-align:middle;\">");
-    out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Perfil</button>");
-    out.println("</td>");
-    out.println("<td bgcolor=\"#b9b9b9\" style=\"width:12%; vertical-align:middle;\">");
-    out.println("<a href=\"Revista\">");
-    out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\"><b>Revista</b></button>");
-    out.println("</a>");
-    out.println("</td>");
-    out.println("<td style=\"width:12%; vertical-align:middle;\">");
-    out.println("<a href=\"Solicitudes\">");
-    out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Solicitudes</button>");
-    out.println("</a>");
-    out.println("</td>");
-    out.println("<td style=\"width:12%; vertical-align:middle;\">");
-    out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Logout</button>");
-    out.println("</td>");
-    out.println("<td style=\"width:40%\">");
-    out.println("<input name=\"keyword\" type=\"text\" placeholder=\"Search\" style=\"width:50%\">");
-    out.println("</td>");
-    out.println("</tr>");
-    out.println("</table>");
 
-    titulo = request.getParameter("titulo");
-    if(titulo == null){
-      desplegarSitioWebRevista();
+    HttpSession session = request.getSession(true);
+
+    if(!session.getAttribute("tipocuenta").equals("Suscriptor") && !session.getAttribute("tipocuenta").equals("Escritor") && !session.getAttribute("tipocuenta").equals("Juez")){
+      out.println("<p>Lo sentimos, usted no tiene permisos.</p>");
+      out.println("<a href=\"index.html\">Regresar a Inicio</a>");
     }
     else{
-      desplegarArticulo();
+      //Preparar el encabezado de la pagina Web de respuesta
+      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
+      out.println("<HTML>");
+      out.println("<HEAD>");
+      out.println("<META http-equiv=Content-Type content=\"text/html\">");
+      out.println("</HEAD>");
+      out.println("<BODY>");
+      out.println("<table border=\"1\" style=\"width:100%; text-align:center;\">");
+      out.println("<tr>");
+      out.println("<td style=\"width:12%; vertical-align:middle;\"><h3 style=\"display:inline\">SEB&B</h3></td>");
+      out.println("<td style=\"width:12%; vertical-align:middle;\">");
+      out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Perfil</button>");
+      out.println("</td>");
+      out.println("<td bgcolor=\"#b9b9b9\" style=\"width:12%; vertical-align:middle;\">");
+      out.println("<a href=\"Revista\">");
+      out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\"><b>Revista</b></button>");
+      out.println("</a>");
+      out.println("</td>");
+      out.println("<td style=\"width:12%; vertical-align:middle;\">");
+      out.println("<a href=\"Solicitudes\">");
+      out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Solicitudes</button>");
+      out.println("</a>");
+      out.println("</td>");
+      out.println("<td style=\"width:12%; vertical-align:middle;\">");
+      out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Logout</button>");
+      out.println("</td>");
+      out.println("<td style=\"width:40%\">");
+      out.println("<input name=\"keyword\" type=\"text\" placeholder=\"Search\" style=\"width:50%\">");
+      out.println("</td>");
+      out.println("</tr>");
+      out.println("</table>");
+
+      titulo = request.getParameter("titulo");
+      if(titulo == null){
+        desplegarSitioWebRevista();
+      }
+      else{
+        desplegarArticulo();
+      }
     }
   }
 

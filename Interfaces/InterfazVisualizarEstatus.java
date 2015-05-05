@@ -36,7 +36,7 @@ public class InterfazVisualizarEstatus extends HttpServlet {
     out.println(id);
         
     cc = new ControlVisualizarEstatus();
-    if (cc.getTipoUsuario(id).equals("Escritor")){
+    if ((session.getAttribute("tipocuenta")).equals("Escritor")){
           out.println(cc.verArticulos(id));
           out.println("<a href=\"index_escritor.html\">Regresar a Pantalla de Escritor</a>");
     } else {
