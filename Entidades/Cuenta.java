@@ -9,6 +9,7 @@
 package entidades;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 // Clase base de cuentas de usuario
@@ -28,6 +29,34 @@ public class Cuenta {
     // Metodo constructor vacio
     public Cuenta(){
       
+    }
+    
+    //BUSCAR CUENTAS POR NOMBRE
+    public ArrayList buscarCuentasPorNombre(String nombre){
+        
+        ArrayList<CuentaAuxiliar> cuentas = new ArrayList<CuentaAuxiliar>();
+        
+        try{
+            stmt.executeQuery("SELECT * FROM cuenta WHERE nombre = '"+nombre+"'");
+            ResultSet rs = stmt.getResultSet();
+            
+            while(rs.next()){
+                CuentaAuxiliar cuentaAux = new CuentaAuxiliar();
+                
+                cuentaAux.setIdCuenta(rs.getInt("idCuenta"));
+                cuentaAux.setNombre(rs.getString("nombre"));
+                cuentaAux.setApellidos(rs.getString("apellidos"));
+                cuentaAux.setEmail(rs.getString("email"));
+                cuentaAux.setPasswd(rs.getString("passwd"));
+                cuentaAux.setTipoUsuario(rs.getString("tipoUsuario"));
+                
+                cuentas.add(cuentaAux);
+            }
+        }
+        catch(SQLException e){
+            return null;
+        }
+        return cuentas;
     }
     
     // Metodos GET con acceso directo a base de datos
@@ -189,6 +218,20 @@ public class Cuenta {
             System.out.println ("Cannot execute setTipoUsuario()" + e);
         }
     }
+    /*METODO PARA BORRAR CUENTA POR ID
+    public int eliminarCuentaPorId(int idcuenta){
+        int flag = -1;
+        try {
+            String q = "DELETE FROM juez WHERE idCuenta = '"+idcuenta+"'";
+            flag = stmt.executeUpdate(q);
+            
+            String s = "DELETE FROM cuenta WHERE idCuenta = '"+idcuenta+"'"; 
+            flag = stmt.executeUpdate(s);
+        } catch (SQLException e) {
+            System.out.println ("Cannot execute eliminarCuentaPorId()" + e);
+        }
+        return flag;
+    }*/
     
     // Metodo de validacion de existencia de cuenta a partir de un
     // email y passwd dados, que devuelve el id (llave primaria) de la cuenta
@@ -245,7 +288,7 @@ public class Cuenta {
             return nuevoId;
             
         } catch (SQLException e) {
-            System.out.println ("Cannot update database" + e );
+            System.out.println ("Cannot update cuenta" + e );
             return -1;
         }   
     }  

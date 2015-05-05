@@ -9,6 +9,7 @@
 package entidades;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -24,6 +25,33 @@ public class Juez extends Cuenta {
     public Juez(Conexion connect) {
         this.conn = connect.conn;
         this.stmt = connect.statem;
+    }
+    
+    public ArrayList selectJueces(){
+        
+        ArrayList<CuentaAuxiliar> cuentas = new ArrayList<CuentaAuxiliar>();
+        
+        try{
+            stmt.executeQuery("SELECT * FROM cuenta WHERE tipoUsuario = 'Juez'");
+            ResultSet rs = stmt.getResultSet();
+            
+            while(rs.next()){
+                CuentaAuxiliar cuentaAux = new CuentaAuxiliar();
+                
+                cuentaAux.setIdCuenta(rs.getInt("idCuenta"));
+                cuentaAux.setNombre(rs.getString("nombre"));
+                cuentaAux.setApellidos(rs.getString("apellidos"));
+                cuentaAux.setEmail(rs.getString("email"));
+                cuentaAux.setPasswd(rs.getString("passwd"));
+                cuentaAux.setTipoUsuario(rs.getString("tipoUsuario"));
+                
+                cuentas.add(cuentaAux);
+            }
+        }
+        catch(SQLException e){
+            return null;
+        }
+        return cuentas;
     }
     
     //Getters
@@ -78,28 +106,39 @@ public class Juez extends Cuenta {
     // Recibe como parametros todos los atributos de la clase
     public int guardaJuez(String nom, String ape, String ema, String pas, 
             Date fecha, int numJuez){
+            String tipJuez = "Juez";
         try {
-            // Insertar en Cuenta         
-            int nuevoId=guardaCuenta(nom,ape,ema,pas,fecha,"Juez");
+            pStmt = conn.prepareStatement(
+                "INSERT INTO cuenta (nombre,apellidos,email,passwd,fechaDeCreacion,tipoUsuario)" +
+                    " VALUES (?, ?, ?, ?, ?, ?) ",new String[] { "idcuenta" });
+            pStmt.setString(1,nom);
+            pStmt.setString(2,ape);
+            pStmt.setString(3,ema);
+            pStmt.setString(4,pas);
+            pStmt.setDate(5,new java.sql.Date(fecha.getTime()));
+            pStmt.setString(6,tipJuez);
+            
+            pStmt.executeUpdate();
+            
+            // obtener ID de cuenta insertada
+            int nuevoId=-1;
             ResultSet generatedKeys = pStmt.getGeneratedKeys();
             if (null != generatedKeys && generatedKeys.next()) {
                 nuevoId = generatedKeys.getInt(1);
-            }
-            // Se verifica que la cuenta se guardo adecuadamente
-            if(nuevoId == -1){
-                return -1;
-            }                
+            }        
+            
+            System.out.println(nuevoId);
             
             // Insertar en Juez
             pStmt = conn.prepareStatement(
-                "INSERT INTO Juez (idcuenta,numJuez)" +
+                "INSERT INTO juez (idCuenta,numJuez)" +
                     " VALUES (?, ?) ");
             pStmt.setInt(1,nuevoId);
             pStmt.setInt(2,numJuez);
             pStmt.executeUpdate();
             return nuevoId;
         } catch (Exception e) {
-            System.out.println ("Cannot update database" + e );
+            System.out.println ("Cannot update Juez" + e );
             return -1;
         }   
     }

@@ -105,6 +105,24 @@
      <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+      <servlet-name>BuscarCuentas</servlet-name>
+      <servlet-class>interfaces.InterfazBuscarCuentas</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>BuscarCuentas</servlet-name>
+      <url-pattern>/BuscarCuentas</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>AsignarJuez</servlet-name>
+      <servlet-class>interfaces.InterfazAsignarJuez</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>AsignarJuez</servlet-name>
+      <url-pattern>/AsignarJuez</url-pattern>
+    </servlet-mapping>
+
 <!--    <servlet>
       <servlet-name>Transferencia</servlet-name>
       <servlet-class>interfaces.InterfazTransferencia</servlet-class>
