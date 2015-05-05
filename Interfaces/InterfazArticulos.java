@@ -39,10 +39,14 @@ public class InterfazArticulos extends HttpServlet {
     out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Perfil</button>");
     out.println("</td>");
     out.println("<td bgcolor=\"#b9b9b9\" style=\"width:12%; vertical-align:middle;\">");
+    out.println("<a href=\"Revista\">");
     out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\"><b>Revista</b></button>");
+    out.println("</a>");
     out.println("</td>");
     out.println("<td style=\"width:12%; vertical-align:middle;\">");
+    out.println("<a href=\"Solicitudes\">");
     out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Solicitudes</button>");
+    out.println("</a>");
     out.println("</td>");
     out.println("<td style=\"width:12%; vertical-align:middle;\">");
     out.println("<button style=\"width:100%; background-color:transparent\" type=\"button\">Logout</button>");
