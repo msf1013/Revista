@@ -19,52 +19,69 @@ public class InterfazEnvioArticulo extends HttpServlet {
     thisResponse.setContentType("text/html");
 
     HttpSession session = request.getSession(true);
-
     out = thisResponse.getWriter();
-    //Preparar el encabezado de la pagina Web de respuesta
-    out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
-    out.println("<HTML>");
-    out.println("<HEAD>");
-    out.println("<META http-equiv=Content-Type content=\"text/html\">");
-    out.println("</HEAD>");
-    out.println("<BODY>");
-    out.println("<TITLE>Revista</TITLE>");
-    out.println("<h2>Envio de articulo</h2>");
-    //out.println("<h3>Consultar saldo</h3>");
 
-    String titulo = request.getParameter("titulo");
-    String texto = request.getParameter("texto");
-    String abstra = request.getParameter("abstra");
-    int dia=0, mes=0, anio=0;
-    if (request.getParameter("dia") != "" && request.getParameter("dia") != null)
-      dia = Integer.parseInt(request.getParameter("dia"));
-    if (request.getParameter("mes") != "" && request.getParameter("mes") != null)
-      mes = Integer.parseInt(request.getParameter("mes")) - 1;
-    if (request.getParameter("anio") != "" && request.getParameter("anio") != null)
-      anio = Integer.parseInt(request.getParameter("anio")) - 1900;
-            
-    String operacion = request.getParameter("operacion");
-    if(operacion == "" || operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion 
-      desplegarEnvioArticulo();
-    } else if(operacion.equals("enviar")){
-        //String tipo = request.getParameter("tipo");
-        int id = (int)session.getAttribute("idcuenta");
-        cc = new ControlEnvioArticulo();
-        if (session.getAttribute("tipocuenta").equals("Escritor")){
-              if ( cc.crearArticulo(titulo,texto,abstra,new Date(anio,mes,dia),"Pendiente",new Date(),false,id) != -1 ) {
-                out.println("<p>Gracias, su articulo ha sido propuesto.</p>");
-              } else {
-                out.println("<p>Lo sentimos, el articulo no pudo ser enviado.</p>");
-              }
-              out.println("<a href=\"index_escritor.html\">Regresar a Pantalla de Escritor</a>");
-        } else {
-          out.println("<p>Lo sentimos, usted no tiene permiso de envio de articulo.</p>");
-          out.println("<a href=\"index.html\">Regresar a Inicio</a>");
-        }
-        out.println("</BODY>");
-        out.println("</HTML>");
+    if(session.getAttribute("idcuenta") == null || !session.getAttribute("tipocuenta").equals("Escritor")) {
+      out.println("<p>Lo sentimos, usted no tiene permisos de Escritor.</p>");
+      
+      if (session.getAttribute("tipocuenta").equals("Administrador")) {
+        out.println("<a href=\"index_admin.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Juez")) {
+        out.println("<a href=\"index_juez.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Suscriptor")) {
+        out.println("<a href=\"index_suscriptor.html\">Regresar a Inicio</a>");
+       }
+       else {
+        out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+       }
+    } else {
+
+      //Preparar el encabezado de la pagina Web de respuesta
+      out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
+      out.println("<HTML>");
+      out.println("<HEAD>");
+      out.println("<META http-equiv=Content-Type content=\"text/html\">");
+      out.println("</HEAD>");
+      out.println("<BODY>");
+      out.println("<TITLE>Revista</TITLE>");
+      out.println("<h2>Envio de articulo</h2>");
+      //out.println("<h3>Consultar saldo</h3>");
+
+      String titulo = request.getParameter("titulo");
+      String texto = request.getParameter("texto");
+      String abstra = request.getParameter("abstra");
+      int dia=0, mes=0, anio=0;
+      if (request.getParameter("dia") != "" && request.getParameter("dia") != null)
+        dia = Integer.parseInt(request.getParameter("dia"));
+      if (request.getParameter("mes") != "" && request.getParameter("mes") != null)
+        mes = Integer.parseInt(request.getParameter("mes")) - 1;
+      if (request.getParameter("anio") != "" && request.getParameter("anio") != null)
+        anio = Integer.parseInt(request.getParameter("anio")) - 1900;
+              
+      String operacion = request.getParameter("operacion");
+      if(operacion == "" || operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion 
+        desplegarEnvioArticulo();
+      } else if(operacion.equals("enviar")){
+          //String tipo = request.getParameter("tipo");
+          int id = (int)session.getAttribute("idcuenta");
+          cc = new ControlEnvioArticulo();
+          if (session.getAttribute("tipocuenta").equals("Escritor")){
+                if ( cc.crearArticulo(titulo,texto,abstra,new Date(anio,mes,dia),"Pendiente",new Date(),false,id) != -1 ) {
+                  out.println("<p>Gracias, su articulo ha sido propuesto.</p>");
+                } else {
+                  out.println("<p>Lo sentimos, el articulo no pudo ser enviado.</p>");
+                }
+                out.println("<a href=\"index_escritor.html\">Regresar a Pantalla de Escritor</a>");
+          } else {
+            out.println("<p>Lo sentimos, usted no tiene permiso de envio de articulo.</p>");
+            out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+          }
+          out.println("</BODY>");
+          out.println("</HTML>");
+      }
     }
-    
   }
   
   public void desplegarEnvioArticulo(){  
