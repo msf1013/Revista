@@ -195,7 +195,7 @@ public class Orden {
     //Metodo para calcular el cargo de la orden
 
     private double calculaCargo(double costoRevista, double porcentaje, int cantTotal) {        
-        return (double) cantTotal * costoRevista * porcentaje; 
+        return (double) costoRevista * (1 - porcentaje); 
     }
 
 
@@ -221,7 +221,7 @@ public class Orden {
     
     
     //Metodo que guarda la orden y regresa el idOrden
-    public int guardaOrden(int idSus, Vector<Date> vecFecha, Vector<Integer> vecCant, double costoRevista){
+    public boolean guardaOrden(int idSus, Vector<java.sql.Date> vecFecha, Vector<Integer> vecCant, double costoRevista){
         int idOrden = -1;
         double porcentaje= 0.3;
         boolean ordEnv = true;
@@ -259,11 +259,13 @@ public class Orden {
 
             setCargoTotal(idOrden,cargo);
             setNumUnidades(idOrden,unidadesTotales);
-            return idOrden;
+
+            return true;
             
-                    } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("Cannot update database" + e);
-            return -1;
+            return false;
         }
     }
 }

@@ -36,6 +36,7 @@
       <servlet-name>Inicio</servlet-name>
       <url-pattern>/Inicio</url-pattern>
     </servlet-mapping>
+    
     <servlet>
       <servlet-name>Resumenes</servlet-name>
       <servlet-class>interfaces.InterfazSitioWeb</servlet-class>
@@ -44,6 +45,34 @@
       <servlet-name>Resumenes</servlet-name>
       <url-pattern>/Resumenes</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>ArticulosEvaluar</servlet-name>
+      <servlet-class>interfaces.InterfazSeleccionArticulosEvaluar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>ArticulosEvaluar</servlet-name>
+      <url-pattern>/ArticulosEvaluar</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>VotarArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazVotarArticuloPendiente</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>VotarArticulo</servlet-name>
+      <url-pattern>/VotarArticulo</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>PublicarCarta</servlet-name>
+      <servlet-class>interfaces.InterfazPublicarCarta</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>PublicarCarta</servlet-name>
+      <url-pattern>/PublicarCarta</url-pattern>
+    </servlet-mapping>
+
     <servlet>
       <servlet-name>Revista</servlet-name>
       <servlet-class>interfaces.InterfazArticulos</servlet-class>
@@ -69,6 +98,15 @@
     <servlet-mapping>
         <servlet-name>VisualizarEstatus</servlet-name>
         <url-pattern>/VisualizarEstatus</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Solicitudes</servlet-name>
+      <servlet-class>interfaces.InterfazSolicitudNumerosAnteriores</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Solicitudes</servlet-name>
+        <url-pattern>/Solicitudes</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

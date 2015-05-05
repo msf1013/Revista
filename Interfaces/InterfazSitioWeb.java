@@ -23,6 +23,7 @@ public class InterfazSitioWeb extends HttpServlet {
     thisRequest = request;
     thisResponse.setContentType("text/html");
     out = thisResponse.getWriter();
+
     //Preparar el encabezado de la pagina Web de respuesta
     out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">");
     out.println("<HTML>");
