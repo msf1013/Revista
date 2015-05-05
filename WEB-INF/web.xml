@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"  
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
+           http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+         version="2.5">
+
+    <!-- A continuacion deben declararse todas las Interfaces que se implementan como
+         Servlets en el sistema. Para cada Interfaz deben declararse los tags
+         <servlet> y <servlet-mapping>  
+     -->
+
+    <servlet>
+      <servlet-name>Login</servlet-name>
+      <servlet-class>interfaces.InterfazLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Login</servlet-name>
+      <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Registro</servlet-name>
+      <servlet-class>interfaces.InterfazRegistro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registro</servlet-name>
+        <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Inicio</servlet-name>
+      <servlet-class>interfaces.InterfazInicio</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Inicio</servlet-name>
+      <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>Resumenes</servlet-name>
+      <servlet-class>interfaces.InterfazSitioWeb</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Resumenes</servlet-name>
+      <url-pattern>/Resumenes</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>Revista</servlet-name>
+      <servlet-class>interfaces.InterfazArticulos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Revista</servlet-name>
+      <url-pattern>/Revista</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>EnvioArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazEnvioArticulo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnvioArticulo</servlet-name>
+        <url-pattern>/EnvioArticulo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>VisualizarEstatus</servlet-name>
+      <servlet-class>interfaces.InterfazVisualizarEstatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VisualizarEstatus</servlet-name>
+        <url-pattern>/VisualizarEstatus</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+<!--    <servlet>
+      <servlet-name>Transferencia</servlet-name>
+      <servlet-class>interfaces.InterfazTransferencia</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Transferencia</servlet-name>
+        <url-pattern>/Transferencia</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Consulta</servlet-name>
+      <servlet-class>interfaces.InterfazConsulta</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Consulta</servlet-name>
+        <url-pattern>/Consulta</url-pattern>
+    </servlet-mapping> -->
+
+
+
+</web-app>
