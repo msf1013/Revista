@@ -28,9 +28,26 @@ public class InterfazArticulos extends HttpServlet {
 
     HttpSession session = request.getSession(true);
 
-    if(!session.getAttribute("tipocuenta").equals("Suscriptor") && !session.getAttribute("tipocuenta").equals("Escritor") && !session.getAttribute("tipocuenta").equals("Juez")){
+    if(session.getAttribute("idcuenta") == null || (!session.getAttribute("tipocuenta").equals("Suscriptor") && !session.getAttribute("tipocuenta").equals("Escritor") && !session.getAttribute("tipocuenta").equals("Juez"))){
+      
       out.println("<p>Lo sentimos, usted no tiene permisos.</p>");
-      out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+      
+      if (session.getAttribute("tipocuenta").equals("Escritor")) {
+        out.println("<a href=\"index_escritor.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Administrador")) {
+        out.println("<a href=\"index_admin.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Juez")) {
+        out.println("<a href=\"index_juez.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Suscriptor")) {
+        out.println("<a href=\"index_suscriptor.html\">Regresar a Inicio</a>");
+       }
+       else {
+        out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+       }
+
     }
     else{
       //Preparar el encabezado de la pagina Web de respuesta

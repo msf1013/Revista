@@ -29,7 +29,19 @@ public class InterfazSolicitudNumerosAnteriores extends HttpServlet {
 
     if(!(session.getAttribute("tipocuenta")).equals("Suscriptor")){
       out.println("<p>Lo sentimos, usted no tiene permisos de Suscriptor.</p>");
-      out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+      
+      if (session.getAttribute("tipocuenta").equals("Escritor")) {
+        out.println("<a href=\"index_escritor.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Administrador")) {
+        out.println("<a href=\"index_admin.html\">Regresar a Inicio</a>");
+       }
+       else if (session.getAttribute("tipocuenta").equals("Juez")) {
+        out.println("<a href=\"index_juez.html\">Regresar a Inicio</a>");
+       }
+       else {
+        out.println("<a href=\"index.html\">Regresar a Inicio</a>");
+       }
     }
     else{
         //Preparar el encabezado de la pagina Web de respuesta
