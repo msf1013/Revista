@@ -25,8 +25,7 @@ public class Conexion {
             String userName = "root";
             String password = "";
             // direccion de base de datos en entorno de pruebas
-            String url = 
-                    "jdbc:mysql://localhost:3306/revista?zeroDateTimeBehavior=convertToNull";
+            String url = "jdbc:mysql://localhost/revista";
             Class.forName ("com.mysql.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection (url, userName, password);    
             statem = conn.createStatement();

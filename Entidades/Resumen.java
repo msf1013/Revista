@@ -8,6 +8,7 @@
 
 package entidades;
 
+import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +72,61 @@ public class Resumen {
         } catch(Exception e){
             System.out.println("Cannot update database" + e);
             return -1;
+        }
+    }
+
+    public Vector<String> getResumenes(){
+        Vector<String> resumenes = new Vector<String>();
+        Vector<Integer> idResumenes = new Vector<Integer>();
+        Vector<Integer> idArticulos = new Vector<Integer>();
+        String textoResumen;
+        String titulo;
+        int idArticuloPendiente;
+        int idEscritor;
+        String nombre;
+
+        try{
+            stmt.executeQuery("SELECT * FROM resumen");
+            ResultSet rs = stmt.getResultSet();
+            while(rs.next()){
+                int idResumen = rs.getInt("idResumen");
+                idResumenes.add(idResumen);
+                int idArticulo = rs.getInt("idArticulo");
+                idArticulos.add(idArticulo);
+            }
+            for(int i = 0; i < idResumenes.size(); i++){
+                stmt.executeQuery("SELECT * FROM articulo WHERE idArticulo = " + idArticulos.elementAt(i));
+                rs = stmt.getResultSet();
+                rs.next();
+                titulo = rs.getString("titulo");
+                resumenes.add(titulo);
+
+                idArticuloPendiente = rs.getInt("idArticuloPendiente");
+                stmt.executeQuery("SELECT idEscritor FROM articulopendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
+                rs = stmt.getResultSet();
+                rs.next();
+
+                idEscritor = rs.getInt("idEscritor");
+                stmt.executeQuery("SELECT CONCAT(nombre, ' ', apellidos) AS nombre FROM cuenta WHERE idCuenta = " + idEscritor);
+                rs = stmt.getResultSet();
+                rs.next();
+
+                nombre = rs.getString("nombre");
+                resumenes.add(nombre);
+
+                stmt.executeQuery("SELECT textoResumen FROM resumen WHERE idresumen = " + idResumenes.elementAt(i));
+                rs = stmt.getResultSet();
+                rs.next();
+
+                textoResumen = rs.getString("textoResumen");
+                resumenes.add(textoResumen);
+
+                rs.close();
+            }
+            return resumenes;
+        }
+        catch(SQLException e){
+            return null;
         }
     }
     
