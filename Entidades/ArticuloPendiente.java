@@ -349,7 +349,7 @@ public class ArticuloPendiente {
     * @param idArticuloPendiente ID del articulo pendiente
     * @return  Fecha de publicacion esperada del articulo pendiente
     */
-   public Date getFechPubEsperada(int idArticuloPendiente){
+   public Date getFechaPubEsperada(int idArticuloPendiente){
       Date fecha = null;
       try {
          stmt.executeQuery ("SELECT fechaPubEsperada FROM ArticuloPendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
@@ -440,10 +440,12 @@ public class ArticuloPendiente {
     * @param idArticuloPendiente ID del articulo pendiente
     * @param validado Bandera de validacion
     */
-   public void setValidado(int idArticuloPendiente, Boolean validado){
+   public void setValidado(int idArticuloPendiente){
       try {
-         String s = "UPDATE ArticuloPendiente SET validado = " + validado + " WHERE idArticuloPendiente = " + idArticuloPendiente;
-         stmt.executeUpdate(s);
+         pStmt = conn.prepareStatement(
+                 "UPDATE ArticuloPendiente SET validado = TRUE WHERE idArticuloPendiente = ?");
+         pStmt.setInt(1, idArticuloPendiente);
+         pStmt.executeUpdate();
       } catch (SQLException e) {
          System.out.println ("Cannot execute setValidado(): " + e);
       }
@@ -501,5 +503,21 @@ public class ArticuloPendiente {
          System.out.println ("Cannot getIdEscritor(): " + e);
       }
       return idEscritor;
+   }
+
+   public Vector<Integer> obtenerArticulos() {
+      Vector<Integer> ids = new Vector<Integer>();
+      try {
+         pStmt = conn.prepareStatement(
+            "SELECT idArticuloPendiente FROM ArticuloPendiente WHERE validado IS FALSE");
+
+         ResultSet rs = pStmt.executeQuery();
+         while (rs.next()) {
+            ids.add(rs.getInt("idArticuloPendiente"));
+         }
+      } catch (Exception e) {
+         System.out.println ("Cannot getVotos(): " + e );
+      }
+      return ids;
    }
 }

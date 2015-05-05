@@ -147,6 +147,6 @@ public class Administrador extends Cuenta {
     */
    public void validarArticulo(int idArticulo) {
       ArticuloPendiente articulo = new ArticuloPendiente(new Conexion());
-      articulo.setValidado(idArticulo, true);
+      articulo.setValidado(idArticulo);
    }
 }
