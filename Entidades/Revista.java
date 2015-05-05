@@ -47,9 +47,10 @@ public class Revista {
     public int getIdRevista(Date fechaRevista) {
         int iIdRevista = -1;
         try {
-            stmt.executeQuery("SELECT idRevista FROM revista WHERE fechaPublicacion = " 
-                + fechaRevista);
-            ResultSet rs = stmt.getResultSet();
+            pStmt = conn.prepareStatement(
+                    "SELECT idRevista FROM revista WHERE fechaPublicacion = (?)");
+            pStmt.setDate(1, java.sql.Date.valueOf(fechaRevista.toString()));
+            ResultSet rs = pStmt.executeQuery();
             rs.next();
             iIdRevista = rs.getInt("idRevista");
             rs.close();
@@ -122,4 +123,32 @@ public class Revista {
         }
     }
     
+    public Vector<String> getRevistas(){
+        Vector<String> revistas = new Vector<String>();
+        int idRevista;
+        Date fecha;
+        String strFecha;
+        int mes;
+        String meses[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+
+        try{
+            stmt.executeQuery("SELECT * FROM revista");
+            ResultSet rs = stmt.getResultSet();
+            while(rs.next()){
+                idRevista = rs.getInt("idRevista");
+                fecha = rs.getDate("fechaPublicacion");
+                strFecha = fecha.toString();
+                revistas.add(Integer.toString(idRevista));
+                revistas.add(meses[Integer.parseInt(strFecha.substring(5,7))]);
+                revistas.add(strFecha.substring(0, 4));
+                revistas.add(fecha.toString());
+            }
+        
+            return revistas;
+        }
+        catch(SQLException e){
+            return null;
+        }
+    }
+
 }

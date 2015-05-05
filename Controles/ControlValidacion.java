@@ -14,4 +14,9 @@ public class ControlValidacion {
       return(cuenta.validarCuenta(email,passwd));
    }
 
+   //Valida si la cuenta existe en la base de datos
+   public String getTipoUsuario(int id){            
+      return (cuenta.getTipoUsuario(id));
+   }
+
 }

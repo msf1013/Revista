@@ -18,6 +18,16 @@
       <servlet-name>Login</servlet-name>
       <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Registro</servlet-name>
+      <servlet-class>interfaces.InterfazRegistro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registro</servlet-name>
+        <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+
     <servlet>
       <servlet-name>Inicio</servlet-name>
       <servlet-class>interfaces.InterfazInicio</servlet-class>
@@ -35,6 +45,7 @@
       <url-pattern>/Resumenes</url-pattern>
     </servlet-mapping>
     <servlet>
+<<<<<<< HEAD
       <servlet-name>ArticulosEvaluar</servlet-name>
       <servlet-class>interfaces.InterfazSeleccionArticulosEvaluar</servlet-class>
     </servlet>
@@ -58,6 +69,39 @@
       <servlet-name>PublicarCarta</servlet-name>
       <url-pattern>/PublicarCarta</url-pattern>
     </servlet-mapping>
+=======
+      <servlet-name>Revista</servlet-name>
+      <servlet-class>interfaces.InterfazArticulos</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Revista</servlet-name>
+      <url-pattern>/Revista</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>EnvioArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazEnvioArticulo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnvioArticulo</servlet-name>
+        <url-pattern>/EnvioArticulo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>VisualizarEstatus</servlet-name>
+      <servlet-class>interfaces.InterfazVisualizarEstatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VisualizarEstatus</servlet-name>
+        <url-pattern>/VisualizarEstatus</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+>>>>>>> 17a1587cc5d3e506961fbb6677748113b61f17e0
 <!--    <servlet>
       <servlet-name>Transferencia</servlet-name>
       <servlet-class>interfaces.InterfazTransferencia</servlet-class>

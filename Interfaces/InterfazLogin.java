@@ -29,32 +29,40 @@ public class InterfazLogin extends HttpServlet {
     out.println("<BODY>");
     out.println("<TITLE>Revista</TITLE>");
     out.println("<h2>Login</h2>");
-    //out.println("<h3>Consultar saldo</h3>");
-
-    out.println("<p>Vamos a obtener atributos</p>");
+    
     String email = request.getParameter("email");
     String passwd = request.getParameter("passwd");
 
         
     String operacion = request.getParameter("operacion");
-    if(operacion != null && operacion.equals("validar")){ // El menu nos envia un parametro para indicar el inicio de una transaccion
-      out.println("<p>Entramos al segundo if</p>");
-      out.println(operacion); 
-      cc = new ControlValidacion();
-      //La funcion trim() elimina espacios antes y despues del valor
-      int idcuenta = cc.validarCuenta(email,passwd);
-      if (idcuenta == -1){
-         desplegarLogin();    
-      } else {
-          session.setAttribute("idcuenta", idcuenta);
-         desplegarInicio(session);
-         response.sendRedirect("Inicio");
-      }
-    } else {
-      out.println("<p>Entramos al primer if</p>");
-      out.println(operacion); 
+    if(operacion == "" || operacion == null){ // El menu nos envia un parametro para indicar el inicio de una transaccion
       desplegarLogin();
-    } 
+    } else if(operacion.equals("validar")){ 
+        cc = new ControlValidacion();
+        //La funcion trim() elimina espacios antes y despues del valor
+        int idcuenta = cc.validarCuenta(email,passwd);
+        if (idcuenta == -1){
+           desplegarLogin();    
+        } else {
+           session.setAttribute("idcuenta", idcuenta);
+           String tipoCuenta = cc.getTipoUsuario(idcuenta);
+           //desplegarInicio(session);
+           if (tipoCuenta.equals("Escritor")) {
+            response.sendRedirect("index_escritor.html"); 
+           }
+           else if (tipoCuenta.equals("Administrador")) {
+            response.sendRedirect("index_admin.html"); 
+           }
+           else if (tipoCuenta.equals("Juez")) {
+            response.sendRedirect("index_juez.html"); 
+           }
+           else if (tipoCuenta.equals("Suscriptor")) {
+            response.sendRedirect("index_suscriptor.html"); 
+           }
+
+        }
+    }
+    
   }
   
   public void desplegarLogin(){  
@@ -85,16 +93,6 @@ public class InterfazLogin extends HttpServlet {
     } else {
        desplegarInicio();
     }
-  }*/
-  
-  public void desplegarInicio(HttpSession session){ 
-
-    out.println("<p>"+session.getAttribute("idcuenta").toString()+"</p>");
-    out.println("<p>Estamos en desplegarInicio()</p>");
-    out.println("</BODY>");
-    out.println("</HTML>");
-        
-  } 
-   
+  }*/   
    
 }
