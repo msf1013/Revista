@@ -18,6 +18,16 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Registro</servlet-name>
+      <servlet-class>interfaces.InterfazRegistro</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Registro</servlet-name>
+        <url-pattern>/Registro</url-pattern>
+    </servlet-mapping>
+
     <servlet>
       <servlet-name>Inicio</servlet-name>
       <servlet-class>interfaces.InterfazInicio</servlet-class>
@@ -25,6 +35,29 @@
     <servlet-mapping>
         <servlet-name>Inicio</servlet-name>
         <url-pattern>/Inicio</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>EnvioArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazEnvioArticulo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EnvioArticulo</servlet-name>
+        <url-pattern>/EnvioArticulo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>VisualizarEstatus</servlet-name>
+      <servlet-class>interfaces.InterfazVisualizarEstatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VisualizarEstatus</servlet-name>
+        <url-pattern>/VisualizarEstatus</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+     <servlet-name>default</servlet-name>
+     <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
 <!--    <servlet>
