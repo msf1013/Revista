@@ -117,7 +117,7 @@ public class InterfazPublicarCarta extends HttpServlet {
 
       controlCarta = new ControlCarta();
       controlCarta.publicarCarta(fecha, carta);
-      response.sendRedirect("index.html");
+      response.sendRedirect("Revista");
 
    }
 

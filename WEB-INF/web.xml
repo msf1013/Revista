@@ -100,6 +100,24 @@
         <url-pattern>/Solicitudes</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+      <servlet-name>ValidarPublicacion</servlet-name>
+      <servlet-class>interfaces.InterfazValidarPublicacion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValidarPublicacion</servlet-name>
+        <url-pattern>/ValidarPublicacion</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+      <servlet-name>AprobarArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazAprobarArticulo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AprobarArticulo</servlet-name>
+        <url-pattern>/AprobarArticulo</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
      <servlet-name>default</servlet-name>
      <url-pattern>*.html</url-pattern>

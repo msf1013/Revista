@@ -49,20 +49,19 @@ public class Articulo {
     * @param fechaAprobacion Fecha en la que se aprobo el articulo
     * @return ID del registro nuevo, -1 si hubo algun error
     */
-   public int guardarArticulo(int idRevista, String titulo,
+   public int guardarArticulo(String titulo,
          String textoArticulo, String abstractArticulo, int idArticuloPendiente,
          Date fechaAprobacion){
       try {
          pStmt = conn.prepareStatement(
-               "INSERT INTO Articulo (idRevista, titulo, textoArticulo, abstract, idArticuloPendiente, fechaAprobacion)" +
-               " VALUES (?, ?, ?, ?, ?, ?) ", new String[] { "idArticulo" });
+               "INSERT INTO Articulo (titulo, textoArticulo, abstract, idArticuloPendiente, fechaAprobacion)" +
+               " VALUES (?, ?, ?, ?, ?) ", new String[] { "idArticulo" });
 
-         pStmt.setInt(1, idRevista);
-         pStmt.setString(2, titulo);
-         pStmt.setString(3, textoArticulo);
-         pStmt.setString(4, abstractArticulo);
-         pStmt.setInt(5, idArticuloPendiente);
-         pStmt.setDate(6, new java.sql.Date(fechaAprobacion.getTime()));
+         pStmt.setString(1, titulo);
+         pStmt.setString(2, textoArticulo);
+         pStmt.setString(3, abstractArticulo);
+         pStmt.setInt(4, idArticuloPendiente);
+         pStmt.setDate(5, new java.sql.Date(fechaAprobacion.getTime()));
 
          pStmt.executeUpdate();
 
