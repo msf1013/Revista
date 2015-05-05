@@ -34,7 +34,30 @@
       <servlet-name>Resumenes</servlet-name>
       <url-pattern>/Resumenes</url-pattern>
     </servlet-mapping>
-
+    <servlet>
+      <servlet-name>ArticulosEvaluar</servlet-name>
+      <servlet-class>interfaces.InterfazSeleccionArticulosEvaluar</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>ArticulosEvaluar</servlet-name>
+      <url-pattern>/ArticulosEvaluar</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>VotarArticulo</servlet-name>
+      <servlet-class>interfaces.InterfazVotarArticuloPendiente</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>VotarArticulo</servlet-name>
+      <url-pattern>/VotarArticulo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+      <servlet-name>PublicarCarta</servlet-name>
+      <servlet-class>interfaces.InterfazPublicarCarta</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>PublicarCarta</servlet-name>
+      <url-pattern>/PublicarCarta</url-pattern>
+    </servlet-mapping>
 <!--    <servlet>
       <servlet-name>Transferencia</servlet-name>
       <servlet-class>interfaces.InterfazTransferencia</servlet-class>
