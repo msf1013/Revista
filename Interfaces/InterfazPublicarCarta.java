@@ -8,11 +8,11 @@ import java.util.*;
 import controles.ControlValidacion;
 
 public class InterfazPublicarCarta extends HttpServlet {
-  HttpServletResponse thisResponse;
-  HttpServletRequest thisRequest;
-  PrintWriter out;
-  ControlVoto controlVoto;
-  
+   HttpServletResponse thisResponse;
+   HttpServletRequest thisRequest;
+   PrintWriter out;
+   ControlCarta controlCarta;
+
    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       thisResponse = response;
       thisRequest = request;
@@ -80,30 +80,27 @@ public class InterfazPublicarCarta extends HttpServlet {
       out.println("</div>");
       out.println("</form>");
 
-      out.println("<form method=\"GET\" action=\"ArticulosEvaluar\">");
+      out.println("<form method=\"GET\" action=\"Revista\">");
       out.println("<input type=\"submit\" value=\"Cancelar\" class=\"btn btn-default\">");
       out.println("</form>");
       out.println("</div>");
    }
 
-   /*public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       response.setContentType("text/html");  
       PrintWriter out = response.getWriter();
 
-      int idJuez = Integer.parseInt(request.getParameter("idJuez"));
-      int idArticulo = Integer.parseInt(request.getParameter("idArticulo"));
-      String voto = request.getParameter("voto");
-      String comentario = request.getParameter("comentario").trim();
-      int votoInt = (voto.equals("Aceptado")) ? 1 : 0;
+      int dia = Integer.parseInt(request.getParameter("dia"));
+      int mes = Integer.parseInt(request.getParameter("mes"));
+      int anio = Integer.parseInt(request.getParameter("anio"));
+      String carta = request.getParameter("carta").trim();
 
-      controlVoto = new ControlVoto();
-      controlVoto.enviarVoto(idArticulo, idJuez, votoInt);
+      java.sql.Date fecha = new java.sql.Date(anio, mes, dia);
 
-      if (comentario != null || comentario != "") {
-         controlVoto.enviarComentario(idArticulo, idJuez, comentario);
-         out.println("<h2>Coemntario Enviado</h2>");
-      }
-      response.sendRedirect("ArticulosEvaluar");
-   }*/
+      controlCarta = new ControlCarta();
+      controlCarta.publicarCarta(fecha, carta);
+      response.sendRedirect("index.html");
+
+   }
 
 }
