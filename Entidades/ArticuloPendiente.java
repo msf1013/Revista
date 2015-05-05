@@ -105,13 +105,14 @@ public class ArticuloPendiente {
     * @param idJuez ID del Juez que realiza la votación
     * @param voto Voto del instructor, 1 si es aprobado, 0 si es rechazado
     */
-   public void AgregarVoto(int idArticuloPendiente, int idJuez, int voto) {
+   public void agregarVoto(int idArticuloPendiente, int idJuez, int voto) {
       try {
          pStmt = conn.prepareStatement("INSERT INTO Votos VALUES (?, ?, ?)");
 
          pStmt.setInt(1, idArticuloPendiente);
          pStmt.setInt(2, idJuez);
          pStmt.setInt(3, voto);
+         pStmt.executeUpdate();
       } catch (Exception e) {
          System.out.println("Cannot add vote: " + e);
       }
@@ -123,13 +124,14 @@ public class ArticuloPendiente {
     * @param idJuez ID del Juez que realiza el coementario
     * @param comentario Comentario del juez
     */
-   public void AgregarComentario(int idArticuloPendiente, int idJuez, String comentario) {
+   public void agregarComentario(int idArticuloPendiente, int idJuez, String comentario) {
       try {
          pStmt = conn.prepareStatement("INSERT INTO Comentarios VALUES (?, ?, ?)");
 
          pStmt.setInt(1, idArticuloPendiente);
          pStmt.setInt(2, idJuez);
          pStmt.setString(3, comentario);
+         pStmt.executeUpdate();
       } catch (Exception e) {
          System.out.println("Cannot add comentario: " + e);
       }
@@ -264,7 +266,7 @@ public class ArticuloPendiente {
     */
    public void setTexto(int idArticuloPendiente, String texto){
       try {
-         String s = "UPDATE ArticuloPendiente SET texto = '" + texto + "' WHERE idArticuloPendiente = " + idArticuloPendiente;
+         String s = "UPDATE ArticuloPendiente SET textoArticulo = '" + texto + "' WHERE idArticuloPendiente = " + idArticuloPendiente;
          stmt.executeUpdate(s);
       } catch (SQLException e) {
          System.out.println ("Cannot execute disposicion()" + e);
@@ -279,10 +281,10 @@ public class ArticuloPendiente {
    public String getTexto(int idArticuloPendiente){
       String texto = "";
       try {
-         stmt.executeQuery ("SELECT texto FROM ArticuloPendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
+         stmt.executeQuery ("SELECT textoArticulo FROM ArticuloPendiente WHERE idArticuloPendiente = " + idArticuloPendiente);
          ResultSet rs = stmt.getResultSet();
          rs.next(); //Va al registro ya validado
-         texto = rs.getString("texto");
+         texto = rs.getString("textoArticulo");
          rs.close();
          return(texto);
       } catch (SQLException e) {
